@@ -2,6 +2,7 @@ import React from 'react';
 import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {Button} from './src/components/Button';
 import {Text} from './src/components/Text';
 
 function App(): JSX.Element {
@@ -19,6 +20,7 @@ function App(): JSX.Element {
       />
 
       <Text preset="headingMedium">TEST</Text>
+      <Button />
     </SafeAreaView>
   );
 }
