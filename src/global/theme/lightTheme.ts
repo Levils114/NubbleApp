@@ -21,6 +21,7 @@ const palette = {
 
 export const lightTheme = createTheme({
   colors: {
+    ...palette,
     primary: palette.greenPrimary,
     primaryContrast: palette.grayWhite,
 
@@ -34,6 +35,8 @@ export const lightTheme = createTheme({
 
     success: palette.greenSuccess,
     successLight: palette.greenSuccessLight,
+
+    transparent: 'transparent',
   },
   spacing: {
     s4: 4,

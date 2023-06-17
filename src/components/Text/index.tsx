@@ -3,7 +3,7 @@ import React from 'react';
 import {TextStyle, TextProps as RNTextProps} from 'react-native';
 import {Theme} from '../../global/theme/lightTheme';
 
-interface TextProps extends RestyleTextProps<Theme>, RNTextProps {
+export interface TextProps extends RestyleTextProps<Theme>, RNTextProps {
   preset?: TypographyVariants;
   bold?: boolean;
   italic?: boolean;
@@ -68,7 +68,7 @@ function getFontFamily(
   }
 }
 
-const RestyleText = createText();
+const RestyleText = createText<Theme>();
 
 export function Text({
   children,
@@ -83,7 +83,10 @@ export function Text({
   const fontFamily = getFontFamily(preset, bold, italic, medium);
 
   return (
-    <RestyleText style={[styleMapped, {fontFamily}, style]} {...props}>
+    <RestyleText
+      color="backgroundContrast"
+      style={[styleMapped, {fontFamily}, style]}
+      {...props}>
       {children}
     </RestyleText>
   );

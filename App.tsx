@@ -12,6 +12,7 @@ function App(): JSX.Element {
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    marginHorizontal: 24,
   };
 
   return (
@@ -24,6 +25,10 @@ function App(): JSX.Element {
 
         <Text preset="headingMedium">TEST</Text>
         <Button text="Login" />
+        <Button text="Login" preset="outline" marginTop="s20" />
+        <Button loading text="Login" marginTop="s20" />
+        <Button loading text="Login" preset="outline" marginTop="s20" />
+        <Button text="Login" marginTop="s20" disabled />
       </SafeAreaView>
     </ThemeProvider>
   );
