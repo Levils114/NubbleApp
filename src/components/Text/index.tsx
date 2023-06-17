@@ -1,11 +1,9 @@
+import {createText, TextProps as RestyleTextProps} from '@shopify/restyle';
 import React from 'react';
-import {
-  Text as RNText,
-  TextProps as RNTextProps,
-  TextStyle,
-} from 'react-native';
+import {TextStyle, TextProps as RNTextProps} from 'react-native';
+import {Theme} from '../../global/theme/lightTheme';
 
-interface TextProps extends RNTextProps {
+interface TextProps extends RestyleTextProps<Theme>, RNTextProps {
   preset?: TypographyVariants;
   bold?: boolean;
   italic?: boolean;
@@ -70,6 +68,8 @@ function getFontFamily(
   }
 }
 
+const RestyleText = createText();
+
 export function Text({
   children,
   style,
@@ -83,8 +83,8 @@ export function Text({
   const fontFamily = getFontFamily(preset, bold, italic, medium);
 
   return (
-    <RNText style={[styleMapped, {fontFamily}, style]} {...props}>
+    <RestyleText style={[styleMapped, {fontFamily}, style]} {...props}>
       {children}
-    </RNText>
+    </RestyleText>
   );
 }
