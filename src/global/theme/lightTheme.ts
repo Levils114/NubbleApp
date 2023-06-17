@@ -65,3 +65,4 @@ export const lightTheme = createTheme({
 
 export type Theme = typeof lightTheme;
 export type ThemeColors = keyof Theme['colors'];
+export type ThemeSpacing = keyof Theme['spacing'];

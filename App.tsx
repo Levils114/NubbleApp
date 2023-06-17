@@ -6,6 +6,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Button} from './src/components/Button';
 import {Text} from './src/components/Text';
 import {lightTheme} from './src/global/theme/lightTheme';
+import {Icon} from './src/components/Icon';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -29,6 +30,10 @@ function App(): JSX.Element {
         <Button loading text="Login" marginTop="s20" />
         <Button loading text="Login" preset="outline" marginTop="s20" />
         <Button text="Login" marginTop="s20" disabled />
+        <Icon name="eyeOn" />
+        <Icon name="eyeOff" />
+        <Icon name="comment" />
+        <Icon name="heart" />
       </SafeAreaView>
     </ThemeProvider>
   );
