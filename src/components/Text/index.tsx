@@ -20,7 +20,7 @@ type TypographyVariants =
   | 'paragraphCaption'
   | 'paragraphCaptionSmall';
 
-const textFontSizeMap: Record<TypographyVariants, TextStyle> = {
+export const textFontSizeMap: Record<TypographyVariants, TextStyle> = {
   headingLarge: {fontSize: 32, lineHeight: 38.4},
   headingMedium: {fontSize: 22, lineHeight: 26.4},
   headingSmall: {fontSize: 18, lineHeight: 23.4},
@@ -33,7 +33,7 @@ const textFontSizeMap: Record<TypographyVariants, TextStyle> = {
   paragraphCaptionSmall: {fontSize: 10, lineHeight: 14},
 };
 
-const textFontFamilyMap = {
+export const textFontFamilyMap = {
   satoshiBlack: 'Satoshi-Black',
   satoshiBlackItalic: 'Satoshi-BlackItalic',
   satoshiBold: 'Satoshi-Bold',
