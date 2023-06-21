@@ -13,7 +13,7 @@ import {Box, TouchableOpacityBox} from '../Box';
 import {Text, textFontFamilyMap, textFontSizeMap} from '../Text';
 import {Theme} from '../../global/theme/lightTheme';
 
-interface TextInputProps extends RNTextInputProps {
+export interface TextInputProps extends RNTextInputProps {
   label: string;
   errorMessage?: string;
   boxProps?: BoxProps<Theme>;

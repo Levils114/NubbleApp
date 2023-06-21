@@ -1,13 +1,20 @@
-/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
+
+import {AuthNativeStackScreenProps} from '../../../@types/AuthNativeStackScreenProps';
 
 import {Text} from './../../../components/Text';
 import {Button} from './../../../components/Button';
 import {TextInput} from './../../../components/TextInput/TextInput';
-import {Icon} from './../../../components/Icon';
 import {ScreenWrapper} from '../../../components/ScreenWrapper/ScreenWrapper';
+import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 
-export function LoginScreen() {
+export function LoginScreen({
+  navigation,
+}: AuthNativeStackScreenProps<'LoginScreen'>) {
+  function handleCreateAccount() {
+    navigation.navigate('SignUpScreen');
+  }
+
   return (
     <ScreenWrapper>
       <Text preset="headingLarge">Olá</Text>
@@ -22,13 +29,12 @@ export function LoginScreen() {
           mb: 's20',
         }}
       />
-      <TextInput
+      <PasswordInput
         label="Senha"
         placeholder="Digite sua senha"
         boxProps={{
           mb: 's10',
         }}
-        rightComponent={() => <Icon name="eyeOn" color="gray2" />}
       />
 
       <Text color="primary" bold preset="paragraphSmall">
@@ -36,7 +42,12 @@ export function LoginScreen() {
       </Text>
 
       <Button text="Entrar" mt="s48" />
-      <Button text="Criar uma conta" mt="s12" preset="outline" />
+      <Button
+        text="Criar uma conta"
+        mt="s12"
+        preset="outline"
+        onPress={handleCreateAccount}
+      />
     </ScreenWrapper>
   );
 }
