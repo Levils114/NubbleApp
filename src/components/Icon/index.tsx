@@ -28,6 +28,7 @@ export function Icon({
       color={svgColor}
       width={svgSpacing}
       height={svgSpacing}
+      stroke={svgColor}
       {...props}
     />
   );

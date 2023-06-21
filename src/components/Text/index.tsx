@@ -6,8 +6,8 @@ import {Theme} from '../../global/theme/lightTheme';
 export interface TextProps extends RestyleTextProps<Theme>, RNTextProps {
   preset?: TypographyVariants;
   bold?: boolean;
+  semibold?: boolean;
   italic?: boolean;
-  medium?: boolean;
 }
 
 type TypographyVariants =
@@ -50,7 +50,7 @@ function getFontFamily(
   preset: TypographyVariants,
   bold?: boolean,
   italic?: boolean,
-  medium?: boolean,
+  semibold?: boolean,
 ) {
   const isBold = bold || preset?.includes('heading');
 
@@ -61,8 +61,10 @@ function getFontFamily(
       return textFontFamilyMap.satoshiBold;
     case italic:
       return textFontFamilyMap.satoshiItalic;
-    case medium && italic:
+    case semibold && italic:
       return textFontFamilyMap.satoshiMediumItalic;
+    case semibold:
+      return textFontFamilyMap.satoshiMedium;
     default:
       return textFontFamilyMap.satoshiRegular;
   }
@@ -76,11 +78,11 @@ export function Text({
   preset = 'paragraphMedium',
   bold,
   italic,
-  medium,
+  semibold,
   ...props
 }: TextProps) {
   const styleMapped = textFontSizeMap[preset];
-  const fontFamily = getFontFamily(preset, bold, italic, medium);
+  const fontFamily = getFontFamily(preset, bold, italic, semibold);
 
   return (
     <RestyleText
