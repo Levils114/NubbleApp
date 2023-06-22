@@ -1,29 +1,56 @@
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 /**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
+ * Metro configuration
+ * https://facebook.github.io/metro/docs/configuration
  *
- * @format
+ * @type {import('metro-config').MetroConfig}
  */
+const assetExts = [
+  // Image formats
+  'bmp',
+  'gif',
+  'jpg',
+  'jpeg',
+  'png',
+  'psd',
+  'webp',
+  // Video formats
+  'm4v',
+  'mov',
+  'mp4',
+  'mpeg',
+  'mpg',
+  'webm',
+  // Audio formats
+  'aac',
+  'aiff',
+  'caf',
+  'm4a',
+  'mp3',
+  'wav',
+  // Document formats
+  'html',
+  'pdf',
+  'yaml',
+  'yml',
+  // Font formats
+  'otf',
+  'ttf',
+  // Archives (virtual files)
+  'zip',
+];
 
-const {getDefaultConfig} = require('metro-config');
+const sourceExts = ['js', 'jsx', 'json', 'ts', 'tsx', 'svg'];
 
-module.exports = (async () => {
-  const {
-    resolver: {sourceExts, assetExts},
-  } = await getDefaultConfig();
-  return {
-    transformer: {
-      babelTransformerPath: require.resolve('react-native-svg-transformer'),
-      getTransformOptions: async () => ({
-        transform: {
-          experimentalImportSupport: false,
-          inlineRequires: true,
-        },
-      }),
-    },
-    resolver: {
-      assetExts: assetExts.filter(ext => ext !== 'svg'),
-      sourceExts: [...sourceExts, 'svg'],
-    },
-  };
-})();
+const config = {
+  transformer: {
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
+  },
+  resolver: {
+    assetExts: assetExts,
+    sourceExts: sourceExts,
+  },
+};
+console.log('test', mergeConfig(getDefaultConfig(__dirname), config));
+
+module.exports = mergeConfig(getDefaultConfig(__dirname), config);
