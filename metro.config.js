@@ -51,6 +51,5 @@ const config = {
     sourceExts,
   },
 };
-console.log('test', mergeConfig(getDefaultConfig(__dirname), config));
 
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);
