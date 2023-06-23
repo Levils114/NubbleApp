@@ -6,8 +6,10 @@ import {ThemeColors, ThemeSpacing} from '../../global/theme/lightTheme';
 import {useAppTheme} from '../../hooks/useAppTheme';
 import {icons} from './icons';
 
-interface Props extends Omit<SvgProps, 'width' | 'height'> {
-  name: keyof typeof icons;
+type IconsNames = keyof typeof icons;
+
+export interface IconProps extends Omit<SvgProps, 'width' | 'height'> {
+  name: IconsNames;
   color?: ThemeColors;
   size?: ThemeSpacing;
   onPress?: () => void;
@@ -19,10 +21,10 @@ export function Icon({
   size = 's20',
   onPress,
   ...props
-}: Props) {
+}: IconProps) {
   const {colors, spacing} = useAppTheme();
   const svgColor = colors[color];
-  const svgSpacing = spacing[size];
+  const svgSize = spacing[size];
 
   const SVGIcon = icons[name];
 
@@ -31,8 +33,8 @@ export function Icon({
       <Pressable onPress={onPress} hitSlop={12}>
         <SVGIcon
           color={svgColor}
-          width={svgSpacing}
-          height={svgSpacing}
+          width={svgSize}
+          height={svgSize}
           stroke={svgColor}
           {...props}
         />
@@ -43,8 +45,8 @@ export function Icon({
   return (
     <SVGIcon
       color={svgColor}
-      width={svgSpacing}
-      height={svgSpacing}
+      width={svgSize}
+      height={svgSize}
       stroke={svgColor}
       {...props}
     />

@@ -47,8 +47,8 @@ const config = {
     babelTransformerPath: require.resolve('react-native-svg-transformer'),
   },
   resolver: {
-    assetExts: assetExts,
-    sourceExts: sourceExts,
+    assetExts,
+    sourceExts,
   },
 };
 console.log('test', mergeConfig(getDefaultConfig(__dirname), config));

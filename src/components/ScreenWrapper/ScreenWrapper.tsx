@@ -10,9 +10,10 @@ import {useAppTheme} from '../../hooks/useAppTheme';
 
 import {Theme} from '../../global/theme/lightTheme';
 
-import {Box} from '../Box';
+import {Box, TouchableOpacityBox} from '../Box';
 import {Icon} from '../Icon';
 import {Text} from '../Text';
+import {useNavigation} from '@react-navigation/native';
 
 interface ScreenWrapper extends BoxProps<Theme>, ViewProps {
   canGoBack?: boolean;
@@ -27,6 +28,7 @@ export function ScreenWrapper({
 }: ScreenWrapper) {
   const {top, bottom} = useAppSafeArea();
   const {colors} = useAppTheme();
+  const {goBack} = useNavigation();
 
   const Container = getContainer(isScrollable);
 
@@ -40,12 +42,17 @@ export function ScreenWrapper({
           style={{paddingTop: top, paddingBottom: bottom}}
           {...props}>
           {canGoBack && (
-            <Box mb="s24" flexDirection="row" alignItems="center">
+            <TouchableOpacityBox
+              mb="s24"
+              flexDirection="row"
+              alignItems="center"
+              width={70}
+              onPress={goBack}>
               <Icon name="arrowLeft" color="primary" />
               <Text ml="s8" semibold>
                 Voltar
               </Text>
-            </Box>
+            </TouchableOpacityBox>
           )}
           {children}
         </Box>

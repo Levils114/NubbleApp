@@ -5,8 +5,22 @@ import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 import {ScreenWrapper} from '../../../components/ScreenWrapper/ScreenWrapper';
 import {Text} from '../../../components/Text';
 import {TextInput} from '../../../components/TextInput/TextInput';
+import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
 
 export function SignUpScreen() {
+  const {reset} = useResetNavigationSuccess();
+
+  function onSubmit() {
+    reset({
+      icon: {
+        name: 'checkRound',
+        color: 'background',
+      },
+      title: 'Sua conta foi criada com sucesso!',
+      subtitle: 'Agora é só fazer login na nossa plataforma',
+    });
+  }
+
   return (
     <ScreenWrapper canGoBack isScrollable>
       <Text preset="headingLarge" mb="s32">
@@ -30,7 +44,7 @@ export function SignUpScreen() {
         boxProps={{mb: 's48'}}
       />
 
-      <Button text="Criar minha conta" />
+      <Button text="Criar minha conta" onPress={onSubmit} />
     </ScreenWrapper>
   );
 }

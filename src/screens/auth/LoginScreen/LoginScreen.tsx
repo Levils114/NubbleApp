@@ -15,6 +15,10 @@ export function LoginScreen({
     navigation.navigate('SignUpScreen');
   }
 
+  function handleForgotPassword() {
+    navigation.navigate('ForgotPasswordScreen');
+  }
+
   return (
     <ScreenWrapper>
       <Text preset="headingLarge">Olá</Text>
@@ -37,7 +41,11 @@ export function LoginScreen({
         }}
       />
 
-      <Text color="primary" bold preset="paragraphSmall">
+      <Text
+        color="primary"
+        bold
+        preset="paragraphSmall"
+        onPress={handleForgotPassword}>
         Esqueci minha senha
       </Text>
 

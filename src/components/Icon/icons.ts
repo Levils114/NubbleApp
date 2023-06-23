@@ -10,6 +10,7 @@ import Camera from './../../assets/icons/camera.svg';
 import ChatOn from './../../assets/icons/chat-on.svg';
 import Chat from './../../assets/icons/chat.svg';
 import Check from './../../assets/icons/check.svg';
+import CheckRound from './../../assets/icons/check-round.svg';
 import ChevronRight from './../../assets/icons/chevron-right.svg';
 import Comment from './../../assets/icons/comment.svg';
 import FlashOff from './../../assets/icons/flash-off.svg';
@@ -19,6 +20,7 @@ import Heart from './../../assets/icons/heart.svg';
 import HomeFill from './../../assets/icons/home-fill.svg';
 import Home from './../../assets/icons/home.svg';
 import Message from './../../assets/icons/message.svg';
+import MessageRound from './../../assets/icons/message-round.svg';
 import NewPost from './../../assets/icons/new-post.svg';
 import ProfileFill from './../../assets/icons/profile-fill.svg';
 import Profile from './../../assets/icons/profile.svg';
@@ -39,6 +41,7 @@ export const icons = {
   chatOn: ChatOn,
   chat: Chat,
   check: Check,
+  checkRound: CheckRound,
   chevronRight: ChevronRight,
   comment: Comment,
   flashOff: FlashOff,
@@ -47,7 +50,8 @@ export const icons = {
   heart: Heart,
   homeFill: HomeFill,
   home: Home,
-  hessage: Message,
+  message: Message,
+  messageRound: MessageRound,
   newPost: NewPost,
   profileFill: ProfileFill,
   profile: Profile,
