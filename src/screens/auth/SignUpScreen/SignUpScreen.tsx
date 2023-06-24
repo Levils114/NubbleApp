@@ -3,22 +3,18 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
 
+import {zodResolver} from '@hookform/resolvers/zod';
+import {SignUpFormSchema, signUpFormSchema} from './signUpFormSchema';
+
 import {Button} from '../../../components/Button';
 import {ScreenWrapper} from '../../../components/ScreenWrapper/ScreenWrapper';
 import {Text} from '../../../components/Text';
 import {FormTextInput} from '../../../components/Form/FormTextInput/FormTextInput';
 import {FormPasswordInput} from '../../../components/Form/FormPasswordInput/FormPasswordInput';
 
-interface SignUpFormProps {
-  username: string;
-  fullname: string;
-  email: string;
-  password: string;
-}
-
 export function SignUpScreen() {
   const {reset} = useResetNavigationSuccess();
-  const {control, formState, handleSubmit} = useForm<SignUpFormProps>({
+  const {control, formState, handleSubmit} = useForm<SignUpFormSchema>({
     defaultValues: {
       username: '',
       fullname: '',
@@ -26,9 +22,10 @@ export function SignUpScreen() {
       password: '',
     },
     mode: 'onChange',
+    resolver: zodResolver(signUpFormSchema),
   });
 
-  function onSubmit(data: SignUpFormProps) {
+  function onSubmit(data: SignUpFormSchema) {
     console.log(data);
 
     reset({
@@ -50,9 +47,6 @@ export function SignUpScreen() {
       <FormTextInput
         control={control}
         name="username"
-        rules={{
-          required: 'Username obrigatório',
-        }}
         label="Seu username"
         placeholder="@"
         boxProps={{mb: 's20'}}
@@ -61,9 +55,6 @@ export function SignUpScreen() {
       <FormTextInput
         control={control}
         name="fullname"
-        rules={{
-          required: 'Nome completo obrigatório',
-        }}
         label="Nome completo"
         placeholder="Digite seu nome completo"
         boxProps={{mb: 's20'}}
@@ -73,13 +64,6 @@ export function SignUpScreen() {
       <FormTextInput
         control={control}
         name="email"
-        rules={{
-          required: 'E-mail obrigatório',
-          pattern: {
-            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-            message: 'E-mail inválido',
-          },
-        }}
         label="E-mail"
         placeholder="Digite seu e-mail"
         boxProps={{mb: 's20'}}

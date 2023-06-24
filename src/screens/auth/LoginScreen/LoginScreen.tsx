@@ -1,8 +1,10 @@
 import React from 'react';
 
 import {useForm} from 'react-hook-form';
+import {zodResolver} from '@hookform/resolvers/zod';
 
 import {AuthNativeStackScreenProps} from '../../../@types/AuthNativeStackScreenProps';
+import {loginFormSchema, LoginFormSchema} from './loginFormSchema';
 
 import {Text} from './../../../components/Text';
 import {Button} from './../../../components/Button';
@@ -10,23 +12,19 @@ import {ScreenWrapper} from '../../../components/ScreenWrapper/ScreenWrapper';
 import {FormTextInput} from '../../../components/Form/FormTextInput/FormTextInput';
 import {FormPasswordInput} from '../../../components/Form/FormPasswordInput/FormPasswordInput';
 
-interface LoginFormProps {
-  email: string;
-  password: string;
-}
-
 export function LoginScreen({
   navigation,
 }: AuthNativeStackScreenProps<'LoginScreen'>) {
-  const {control, formState, handleSubmit} = useForm<LoginFormProps>({
+  const {control, formState, handleSubmit} = useForm<LoginFormSchema>({
     defaultValues: {
       email: '',
       password: '',
     },
     mode: 'onChange',
+    resolver: zodResolver(loginFormSchema),
   });
 
-  function handleLogin(data: LoginFormProps) {
+  function handleLogin(data: LoginFormSchema) {
     console.log(data);
   }
 
@@ -48,13 +46,6 @@ export function LoginScreen({
       <FormTextInput
         control={control}
         name="email"
-        rules={{
-          required: 'E-mail obrigatório',
-          pattern: {
-            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-            message: 'E-mail inválido',
-          },
-        }}
         label="E-mail"
         placeholder="Digite seu e-mail"
         boxProps={{

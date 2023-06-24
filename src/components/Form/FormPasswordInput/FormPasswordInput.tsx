@@ -13,13 +13,6 @@ export function FormPasswordInput<FormType extends FieldValues>({
     <Controller
       control={control}
       name={name}
-      rules={{
-        required: 'Senha obrigatória',
-        minLength: {
-          value: 6,
-          message: 'Senha deve conter pelo menos 6 dígitos',
-        },
-      }}
       render={({field, fieldState}) => (
         <PasswordInput
           label="Senha"
