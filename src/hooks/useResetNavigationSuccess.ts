@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {SuccessScreenParams} from '../screens/auth/SuccessScreen/SuccessScreen';
+import {SuccessScreenParams} from '@screens';
 
 export function useResetNavigationSuccess() {
   const navigation = useNavigation();

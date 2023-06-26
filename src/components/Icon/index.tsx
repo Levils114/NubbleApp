@@ -2,8 +2,8 @@ import React from 'react';
 import {SvgProps} from 'react-native-svg';
 import {Pressable} from 'react-native';
 
-import {ThemeColors, ThemeSpacing} from '../../global/theme/lightTheme';
-import {useAppTheme} from '../../hooks/useAppTheme';
+import {ThemeColors, ThemeSpacing} from '@global/theme/lightTheme';
+import {useAppTheme} from '@hooks';
 import {icons} from './icons';
 
 type IconsNames = keyof typeof icons;

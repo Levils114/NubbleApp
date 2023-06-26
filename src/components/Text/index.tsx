@@ -1,7 +1,9 @@
-import {createText, TextProps as RestyleTextProps} from '@shopify/restyle';
 import React from 'react';
 import {TextStyle, TextProps as RNTextProps} from 'react-native';
-import {Theme} from '../../global/theme/lightTheme';
+
+import {createText, TextProps as RestyleTextProps} from '@shopify/restyle';
+
+import {Theme} from '@global/theme/lightTheme';
 
 export interface TextProps extends RestyleTextProps<Theme>, RNTextProps {
   preset?: TypographyVariants;

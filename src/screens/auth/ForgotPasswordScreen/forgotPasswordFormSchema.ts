@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import {getEmailAttributeSchema} from '../../../helpers/Form/getFormSchemaAttribute';
+import {getEmailAttributeSchema} from '@helpers';
 
 export const forgotPasswordFormSchema = z.object({
   email: getEmailAttributeSchema(),

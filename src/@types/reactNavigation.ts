@@ -1,4 +1,4 @@
-import {StackNavigatorScreensProps} from '../routes/AuthRoutes.routes';
+import {StackNavigatorScreensProps} from '@routes';
 
 declare global {
   namespace ReactNavigation {

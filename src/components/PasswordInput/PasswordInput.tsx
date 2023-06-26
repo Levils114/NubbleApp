@@ -1,8 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 
-import {Icon} from '../Icon';
-import {TextInput, TextInputProps} from '../TextInput/TextInput';
+import {Icon, TextInput, TextInputProps} from '@components';
 
 export function PasswordInput(props: TextInputProps) {
   const [isPasswordSecurity, setIsPasswordSecurity] = React.useState(true);

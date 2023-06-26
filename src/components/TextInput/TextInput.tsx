@@ -7,11 +7,16 @@ import {
   TextInputProps as RNTextInputProps,
 } from 'react-native';
 
-import {useAppTheme} from '../../hooks/useAppTheme';
+import {useAppTheme} from '@hooks';
 
-import {Box, TouchableOpacityBox} from '../Box';
-import {Text, textFontFamilyMap, textFontSizeMap} from '../Text';
-import {Theme} from '../../global/theme/lightTheme';
+import {
+  Box,
+  TouchableOpacityBox,
+  Text,
+  textFontFamilyMap,
+  textFontSizeMap,
+} from '@components';
+import {Theme} from '@global/theme/lightTheme';
 
 export interface TextInputProps extends RNTextInputProps {
   label: string;

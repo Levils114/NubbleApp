@@ -1,11 +1,8 @@
 import React from 'react';
 
-import {AuthNativeStackScreenProps} from '../../../@types/AuthNativeStackScreenProps';
+import {AuthNativeStackScreenProps} from '@types';
 
-import {Button} from '../../../components/Button';
-import {Icon, IconProps} from '../../../components/Icon';
-import {ScreenWrapper} from '../../../components/ScreenWrapper/ScreenWrapper';
-import {Text} from '../../../components/Text';
+import {Button, Icon, IconProps, ScreenWrapper, Text} from '@components';
 
 export interface SuccessScreenParams {
   icon: Pick<IconProps, 'name' | 'color'>;
