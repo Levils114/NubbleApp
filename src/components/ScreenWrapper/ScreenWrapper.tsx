@@ -1,14 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {KeyboardAvoidingView, ViewProps} from 'react-native';
-import {BoxProps} from '@shopify/restyle';
+
+import {Theme} from '@global/theme/lightTheme';
 import {useNavigation} from '@react-navigation/native';
+import {BoxProps} from '@shopify/restyle';
+
+import {Box, TouchableOpacityBox, Icon, Text} from '@components';
+import {useAppSafeArea, useIsAndroid, useAppTheme} from '@hooks';
 
 import {getContainer} from './components/ScreenContainer';
-
-import {useAppSafeArea, useIsAndroid, useAppTheme} from '@hooks';
-import {Box, TouchableOpacityBox, Icon, Text} from '@components';
-import {Theme} from '@global/theme/lightTheme';
 
 interface ScreenWrapper extends BoxProps<Theme>, ViewProps {
   canGoBack?: boolean;

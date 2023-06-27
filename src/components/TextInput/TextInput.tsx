@@ -1,13 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {BoxProps} from '@shopify/restyle';
 import {
   Pressable,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
 } from 'react-native';
 
-import {useAppTheme} from '@hooks';
+import {Theme} from '@global/theme/lightTheme';
+import {BoxProps} from '@shopify/restyle';
 
 import {
   Box,
@@ -16,7 +16,7 @@ import {
   textFontFamilyMap,
   textFontSizeMap,
 } from '@components';
-import {Theme} from '@global/theme/lightTheme';
+import {useAppTheme} from '@hooks';
 
 export interface TextInputProps extends RNTextInputProps {
   label: string;

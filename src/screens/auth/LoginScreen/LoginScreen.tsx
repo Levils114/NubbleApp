@@ -1,7 +1,8 @@
 import React from 'react';
 
-import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {AuthNativeStackScreenProps} from '@types';
+import {useForm} from 'react-hook-form';
 
 import {
   Text,
@@ -11,7 +12,6 @@ import {
   FormPasswordInput,
 } from '@components';
 
-import {AuthNativeStackScreenProps} from '@types';
 import {loginFormSchema, LoginFormSchema} from './loginFormSchema';
 
 export function LoginScreen({

@@ -1,5 +1,5 @@
-import {z} from 'zod';
 import {getEmailAttributeSchema, getPasswordAttributeSchema} from '@helpers';
+import {z} from 'zod';
 
 const userNameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
 
