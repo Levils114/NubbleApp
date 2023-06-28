@@ -8,11 +8,13 @@ import {useAppTheme} from '@hooks';
 
 import {icons} from './icons';
 
-type IconsNames = keyof typeof icons;
+export type IconsNames = keyof typeof icons;
 
 export interface IconProps extends Omit<SvgProps, 'width' | 'height'> {
   name: IconsNames;
   color?: ThemeColors;
+  strokeColor?: ThemeColors;
+  fillColor?: ThemeColors;
   size?: ThemeSpacing;
   onPress?: () => void;
 }
@@ -20,12 +22,16 @@ export interface IconProps extends Omit<SvgProps, 'width' | 'height'> {
 export function Icon({
   name,
   color = 'backgroundContrast',
+  strokeColor,
+  fillColor,
   size = 's20',
   onPress,
   ...props
 }: IconProps) {
   const {colors, spacing} = useAppTheme();
   const svgColor = colors[color];
+  const svgStrokeColor = strokeColor && colors[strokeColor];
+  const svgFillColor = fillColor && colors[fillColor];
   const svgSize = spacing[size];
 
   const SVGIcon = icons[name];
@@ -37,7 +43,8 @@ export function Icon({
           color={svgColor}
           width={svgSize}
           height={svgSize}
-          stroke={svgColor}
+          stroke={svgStrokeColor}
+          fill={svgFillColor}
           {...props}
         />
       </Pressable>
@@ -49,7 +56,8 @@ export function Icon({
       color={svgColor}
       width={svgSize}
       height={svgSize}
-      stroke={svgColor}
+      stroke={svgStrokeColor}
+      fill={svgFillColor}
       {...props}
     />
   );

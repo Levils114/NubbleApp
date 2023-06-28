@@ -1,5 +1,7 @@
 export * from './ActivyIndicator';
 
+export * from './AppTabBar/AppTabBar';
+
 export * from './Box';
 
 export * from './Button';

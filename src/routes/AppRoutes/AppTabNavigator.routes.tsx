@@ -1,7 +1,11 @@
 import React from 'react';
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 
+import {AppTabBar} from '@components';
 import {
   HomeScreen,
   NewPostScreen,
@@ -19,15 +23,46 @@ export type AppBottomTabNavigator = {
 const Tab = createBottomTabNavigator<AppBottomTabNavigator>();
 
 export function AppTabNavigator() {
+  const renderTabBar = ({
+    state,
+    descriptors,
+    navigation,
+    insets,
+  }: BottomTabBarProps) => (
+    <AppTabBar
+      state={state}
+      descriptors={descriptors}
+      navigation={navigation}
+      insets={insets}
+    />
+  );
+
   return (
     <Tab.Navigator
+      tabBar={renderTabBar}
       screenOptions={{
         headerShown: false,
       }}>
-      <Tab.Screen name="HomeScreen" component={HomeScreen} />
-      <Tab.Screen name="NewPostScreen" component={NewPostScreen} />
-      <Tab.Screen name="FavoritesScreen" component={FavoritesScreen} />
-      <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
+      <Tab.Screen
+        name="HomeScreen"
+        options={{title: 'Início'}}
+        component={HomeScreen}
+      />
+      <Tab.Screen
+        name="NewPostScreen"
+        options={{title: 'Novo post'}}
+        component={NewPostScreen}
+      />
+      <Tab.Screen
+        name="FavoritesScreen"
+        options={{title: 'Favoritos'}}
+        component={FavoritesScreen}
+      />
+      <Tab.Screen
+        name="ProfileScreen"
+        options={{title: 'Meu perfil'}}
+        component={ProfileScreen}
+      />
     </Tab.Navigator>
   );
 }
