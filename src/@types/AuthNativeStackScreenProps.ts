@@ -1,8 +1,8 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-import {StackNavigatorScreensProps} from '@routes';
+import {AuthStackNavigatorScreensProps} from '@routes';
 
-export type AuthScreens = keyof StackNavigatorScreensProps;
+export type AuthScreens = keyof AuthStackNavigatorScreensProps;
 
 export type AuthNativeStackScreenProps<Screen extends AuthScreens> =
-  NativeStackScreenProps<StackNavigatorScreensProps, Screen>;
+  NativeStackScreenProps<AuthStackNavigatorScreensProps, Screen>;

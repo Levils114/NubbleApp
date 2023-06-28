@@ -1,7 +1,9 @@
-import {StackNavigatorScreensProps} from '@routes';
+import {AuthStackNavigatorScreensProps, StackAppRoutes} from '@routes';
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends StackNavigatorScreensProps {}
+    interface RootParamList
+      extends AuthStackNavigatorScreensProps,
+        StackAppRoutes {}
   }
 }

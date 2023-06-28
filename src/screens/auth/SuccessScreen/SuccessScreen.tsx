@@ -2,13 +2,7 @@ import React from 'react';
 
 import {AuthNativeStackScreenProps} from '@types';
 
-import {Button, Icon, IconProps, ScreenWrapper, Text} from '@components';
-
-export interface SuccessScreenParams {
-  icon: Pick<IconProps, 'name' | 'color'>;
-  title: string;
-  subtitle: string;
-}
+import {Button, Icon, ScreenWrapper, Text} from '@components';
 
 export function SuccessScreen({
   route: {params},

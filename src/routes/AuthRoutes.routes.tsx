@@ -2,22 +2,28 @@ import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+import {IconProps} from '@components';
 import {
   LoginScreen,
   SignUpScreen,
   SuccessScreen,
-  SuccessScreenParams,
   ForgotPasswordScreen,
 } from '@screens';
 
-export type StackNavigatorScreensProps = {
+export interface SuccessScreenParams {
+  icon: Pick<IconProps, 'name' | 'color'>;
+  title: string;
+  subtitle: string;
+}
+
+export type AuthStackNavigatorScreensProps = {
   LoginScreen: undefined;
   SignUpScreen: undefined;
   SuccessScreen: SuccessScreenParams;
   ForgotPasswordScreen: undefined;
 };
 
-const Stack = createNativeStackNavigator<StackNavigatorScreensProps>();
+const Stack = createNativeStackNavigator<AuthStackNavigatorScreensProps>();
 
 export function AuthRoutes() {
   return (
