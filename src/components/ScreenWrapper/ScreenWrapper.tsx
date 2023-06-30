@@ -23,7 +23,7 @@ export function ScreenWrapper({
   ...props
 }: ScreenWrapper) {
   const {top, bottom} = useAppSafeArea();
-  const {colors} = useAppTheme();
+  const {colors, spacing} = useAppTheme();
   const {goBack} = useNavigation();
 
   const Container = getContainer(isScrollable);
@@ -35,7 +35,12 @@ export function ScreenWrapper({
       <Container backgroundColor={colors.background}>
         <Box
           paddingHorizontal="s24"
-          style={{paddingTop: top, paddingBottom: bottom}}
+          style={{
+            paddingTop: top,
+            paddingBottom: props.paddingBottom
+              ? spacing[props.paddingBottom]
+              : bottom,
+          }}
           {...props}>
           {canGoBack && (
             <TouchableOpacityBox

@@ -14,6 +14,8 @@ export * from './Icon';
 
 export * from './PasswordInput/PasswordInput';
 
+export * from './PostItem/PostItem';
+
 export * from './ScreenWrapper/ScreenWrapper';
 
 export * from './Text';

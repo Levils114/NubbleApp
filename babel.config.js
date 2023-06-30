@@ -12,6 +12,7 @@ module.exports = {
           '@global': './src/global',
           '@helpers': './src/helpers',
           '@hooks': './src/hooks',
+          '@modules': './src/modules',
           '@routes': './src/routes',
           '@screens': './src/screens',
         },

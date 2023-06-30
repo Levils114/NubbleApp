@@ -1,22 +1,41 @@
 import React from 'react';
+import {FlatList, ListRenderItemInfo} from 'react-native';
 
-import {AppTabNavigatorScreenParams} from '@types';
+import {Post, postService} from '@modules';
 
-import {Button, ScreenWrapper, Text} from '@components';
+import {ScreenWrapper, PostItem} from '@components';
 
-export function HomeScreen({
-  navigation,
-}: AppTabNavigatorScreenParams<'HomeScreen'>) {
-  function handleGoToSettingsScreen() {
-    navigation.navigate('SettingsScreen');
+export function HomeScreen() {
+  const [postList, setPostList] = React.useState<Post[]>([]);
+
+  React.useEffect(() => {
+    let isMounted = true;
+
+    getPostList(isMounted);
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  async function getPostList(isMounted: boolean): Promise<void> {
+    const postListResult = await postService.getPostList();
+    if (isMounted) {
+      setPostList(postListResult);
+    }
+  }
+
+  function renderItem({item}: ListRenderItemInfo<Post>) {
+    return <PostItem post={item} />;
   }
 
   return (
-    <ScreenWrapper>
-      <Text preset="headingLarge" textAlign="center">
-        HomeScreen
-      </Text>
-      <Button text="Settings" onPress={handleGoToSettingsScreen} />
+    <ScreenWrapper paddingHorizontal="s0" paddingBottom="s0">
+      <FlatList
+        data={postList}
+        keyExtractor={item => item.id}
+        renderItem={renderItem}
+      />
     </ScreenWrapper>
   );
 }
