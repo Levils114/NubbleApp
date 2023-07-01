@@ -10,12 +10,13 @@ import {icons} from './icons';
 
 export type IconsNames = keyof typeof icons;
 
-export interface IconProps extends Omit<SvgProps, 'width' | 'height'> {
+export interface IconProps extends SvgProps {
   name: IconsNames;
   color?: ThemeColors;
   strokeColor?: ThemeColors;
   fillColor?: ThemeColors;
-  size?: ThemeSpacing;
+  width?: ThemeSpacing;
+  height?: ThemeSpacing;
   onPress?: () => void;
 }
 
@@ -24,7 +25,8 @@ export function Icon({
   color = 'backgroundContrast',
   strokeColor,
   fillColor,
-  size = 's20',
+  width = 's20',
+  height = 's20',
   onPress,
   ...props
 }: IconProps) {
@@ -32,7 +34,8 @@ export function Icon({
   const svgColor = colors[color];
   const svgStrokeColor = strokeColor && colors[strokeColor];
   const svgFillColor = fillColor && colors[fillColor];
-  const svgSize = spacing[size];
+  const svgWidth = spacing[width];
+  const svgHeight = spacing[height];
 
   const SVGIcon = icons[name];
 
@@ -41,8 +44,8 @@ export function Icon({
       <Pressable onPress={onPress} hitSlop={12}>
         <SVGIcon
           color={svgColor}
-          width={svgSize}
-          height={svgSize}
+          width={svgWidth}
+          height={svgHeight}
           stroke={svgStrokeColor}
           fill={svgFillColor}
           {...props}
@@ -54,8 +57,8 @@ export function Icon({
   return (
     <SVGIcon
       color={svgColor}
-      width={svgSize}
-      height={svgSize}
+      width={svgWidth}
+      height={svgHeight}
       stroke={svgStrokeColor}
       fill={svgFillColor}
       {...props}

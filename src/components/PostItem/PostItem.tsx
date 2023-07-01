@@ -2,9 +2,10 @@ import React from 'react';
 
 import {Post} from '@modules';
 
-import {Box, Text} from '@components';
+import {Box} from '@components';
 
 import {PostActions} from './components/PostActions/PostActions';
+import {PostBottom} from './components/PostBottom/PostBottom';
 import {PostHeader} from './components/PostHeader/PostHeader';
 import {PostImage} from './components/PostImage/PostImage';
 
@@ -25,11 +26,11 @@ export function PostItem({post}: PostItemProps) {
         reactionCount={post.reactionCount}
       />
 
-      <Box paddingHorizontal="s24">
-        <Text>{post.author.userName}</Text>
-        <Text>{post.text}</Text>
-        <Text>{`ver ${post.commentCount} comentários`}</Text>
-      </Box>
+      <PostBottom
+        commentCount={post.commentCount}
+        author={post.author}
+        text={post.text}
+      />
     </Box>
   );
 }

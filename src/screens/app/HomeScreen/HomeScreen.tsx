@@ -1,9 +1,12 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
 import {Post, postService} from '@modules';
 
 import {ScreenWrapper, PostItem} from '@components';
+
+import {HomeHeader} from './components/HomeHeader/HomeHeader';
 
 export function HomeScreen() {
   const [postList, setPostList] = React.useState<Post[]>([]);
@@ -29,12 +32,19 @@ export function HomeScreen() {
     return <PostItem post={item} />;
   }
 
+  function renderListHeaderComponent() {
+    return <HomeHeader />;
+  }
+
   return (
-    <ScreenWrapper paddingHorizontal="s0" paddingBottom="s0">
+    <ScreenWrapper
+      style={{paddingHorizontal: 0, paddingTop: 0, paddingBottom: 0}}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={postList}
         keyExtractor={item => item.id}
         renderItem={renderItem}
+        ListHeaderComponent={renderListHeaderComponent}
       />
     </ScreenWrapper>
   );

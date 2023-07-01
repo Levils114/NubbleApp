@@ -23,11 +23,10 @@ export function ScreenWrapper({
   ...props
 }: ScreenWrapper) {
   const {top, bottom} = useAppSafeArea();
-  const {colors, spacing} = useAppTheme();
+  const {colors} = useAppTheme();
   const {goBack} = useNavigation();
 
   const Container = getContainer(isScrollable);
-
   return (
     <KeyboardAvoidingView
       behavior={useIsAndroid() ? undefined : 'padding'}
@@ -35,13 +34,14 @@ export function ScreenWrapper({
       <Container backgroundColor={colors.background}>
         <Box
           paddingHorizontal="s24"
-          style={{
-            paddingTop: top,
-            paddingBottom: props.paddingBottom
-              ? spacing[props.paddingBottom]
-              : bottom,
-          }}
-          {...props}>
+          {...props}
+          style={[
+            {
+              paddingTop: top,
+              paddingBottom: bottom,
+            },
+            props.style,
+          ]}>
           {canGoBack && (
             <TouchableOpacityBox
               mb="s24"
