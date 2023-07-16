@@ -64,6 +64,7 @@ export function AppTabBar({state, descriptors, navigation}: BottomTabBarProps) {
 
         return (
           <TouchableOpacityBox
+            key={route.name}
             activeOpacity={1}
             accessibilityRole="button"
             accessibilityState={isFocused ? {selected: true} : {}}
