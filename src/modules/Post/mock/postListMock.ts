@@ -2,7 +2,7 @@ import {Post} from '../types/Post';
 
 export const postListMock: Post[] = [
   {
-    id: 'post_1',
+    id: 1,
     text: 'This is my first post!',
     author: {
       profileURL: 'https://i.imgur.com/YeE3yKf.jpg',
@@ -15,7 +15,7 @@ export const postListMock: Post[] = [
     favoriteCount: 2,
   },
   {
-    id: 'post_2',
+    id: 2,
     text: 'Check out this cool photo!',
     author: {
       profileURL: 'https://i.imgur.com/BrJUnRl.jpg',
@@ -28,7 +28,7 @@ export const postListMock: Post[] = [
     favoriteCount: 3,
   },
   {
-    id: 'post_3',
+    id: 3,
     text: "Just finished reading this book and it's amazing!",
     author: {
       profileURL: 'https://i.imgur.com/BxgHDci.jpg',
@@ -41,7 +41,7 @@ export const postListMock: Post[] = [
     favoriteCount: 5,
   },
   {
-    id: 'post_4',
+    id: 4,
     text: "I can't believe it's already May!",
     author: {
       profileURL: 'https://i.imgur.com/FmSbPv3.jpg',
@@ -54,7 +54,7 @@ export const postListMock: Post[] = [
     favoriteCount: 1,
   },
   {
-    id: 'post_5',
+    id: 5,
     text: 'Coding day!',
     author: {
       profileURL: 'https://i.imgur.com/DF4Jfxq.jpg',
@@ -67,7 +67,7 @@ export const postListMock: Post[] = [
     favoriteCount: 0,
   },
   {
-    id: 'post_6',
+    id: 6,
     text: "What's your favorite color?",
     author: {
       profileURL: 'https://i.imgur.com/YeE3yKf.jpg',
@@ -80,7 +80,7 @@ export const postListMock: Post[] = [
     favoriteCount: 0,
   },
   {
-    id: 'post_7',
+    id: 7,
     text: "I'm so excited for the weekend!",
     author: {
       profileURL: 'https://i.imgur.com/BrJUnRl.jpg',
@@ -93,7 +93,7 @@ export const postListMock: Post[] = [
     favoriteCount: 1,
   },
   {
-    id: 'post_8',
+    id: 8,
     text: 'Just got back from vacation and it was amazing!',
     author: {
       profileURL: 'https://i.imgur.com/BxgHDci.jpg',
@@ -106,7 +106,7 @@ export const postListMock: Post[] = [
     favoriteCount: 4,
   },
   {
-    id: 'post_9',
+    id: 9,
     text: "I'm loving this new restaurant!",
     imageURL: 'https://i.imgur.com/FmSbPv3.jpg',
     author: {

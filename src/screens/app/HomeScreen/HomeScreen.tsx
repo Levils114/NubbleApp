@@ -13,8 +13,7 @@ import {HomeHeader} from './components/HomeHeader/HomeHeader';
 export function HomeScreen() {
   const flatListRef = React.useRef<FlatList<Post>>(null);
   useScrollToTop(flatListRef);
-  const {postList, error, isLoading, refresh, fetchNextPage} =
-    usePostListCases();
+  const {list, error, isLoading, refresh, fetchNextPage} = usePostListCases();
 
   function renderItem({item}: ListRenderItemInfo<Post>) {
     return <PostItem post={item} />;
@@ -36,8 +35,8 @@ export function HomeScreen() {
       <FlatList
         ref={flatListRef}
         showsVerticalScrollIndicator={false}
-        data={postList}
-        keyExtractor={item => item.id}
+        data={list}
+        keyExtractor={item => String(item.id)}
         renderItem={renderItem}
         ListHeaderComponent={renderListHeaderComponent}
         ListEmptyComponent={renderListEmptyComponent}
@@ -47,7 +46,7 @@ export function HomeScreen() {
         refreshing={isLoading}
         onEndReached={fetchNextPage}
         onEndReachedThreshold={0.1}
-        contentContainerStyle={{flex: postList.length <= 0 ? 1 : undefined}}
+        contentContainerStyle={{flex: list.length <= 0 ? 1 : undefined}}
       />
     </ScreenWrapper>
   );

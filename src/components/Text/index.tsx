@@ -9,6 +9,7 @@ export interface TextProps extends RestyleTextProps<Theme>, RNTextProps {
   bold?: boolean;
   semibold?: boolean;
   italic?: boolean;
+  black?: boolean;
 }
 
 type TypographyVariants =
@@ -52,10 +53,15 @@ function getFontFamily(
   bold?: boolean,
   italic?: boolean,
   semibold?: boolean,
+  black?: boolean,
 ) {
   const isBold = bold || preset?.includes('heading');
 
   switch (true) {
+    case black:
+      return textFontFamilyMap.satoshiBlack;
+    case black && italic:
+      return textFontFamilyMap.satoshiBlackItalic;
     case isBold && italic:
       return textFontFamilyMap.satoshiBoldItalic;
     case isBold:
@@ -80,10 +86,11 @@ export function Text({
   bold,
   italic,
   semibold,
+  black,
   ...props
 }: TextProps) {
   const styleMapped = textFontSizeMap[preset];
-  const fontFamily = getFontFamily(preset, bold, italic, semibold);
+  const fontFamily = getFontFamily(preset, bold, italic, semibold, black);
 
   return (
     <RestyleText

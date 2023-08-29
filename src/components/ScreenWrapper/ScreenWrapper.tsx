@@ -3,28 +3,29 @@ import React from 'react';
 import {KeyboardAvoidingView, ViewProps} from 'react-native';
 
 import {Theme} from '@global/theme/lightTheme';
-import {useNavigation} from '@react-navigation/native';
 import {BoxProps} from '@shopify/restyle';
 
-import {Box, TouchableOpacityBox, Icon, Text} from '@components';
+import {Box} from '@components';
 import {useAppSafeArea, useIsAndroid, useAppTheme} from '@hooks';
 
 import {getContainer} from './components/ScreenContainer';
+import {ScreenWrapperHeader} from './components/ScreenWrapperHeader';
 
-interface ScreenWrapper extends BoxProps<Theme>, ViewProps {
+export interface ScreenWrapper extends BoxProps<Theme>, ViewProps {
   canGoBack?: boolean;
   isScrollable?: boolean;
+  title?: string;
 }
 
 export function ScreenWrapper({
   children,
   canGoBack,
   isScrollable = false,
+  title,
   ...props
 }: ScreenWrapper) {
   const {top, bottom} = useAppSafeArea();
   const {colors} = useAppTheme();
-  const {goBack} = useNavigation();
 
   const Container = getContainer(isScrollable);
   return (
@@ -42,19 +43,7 @@ export function ScreenWrapper({
             },
             props.style,
           ]}>
-          {canGoBack && (
-            <TouchableOpacityBox
-              mb="s24"
-              flexDirection="row"
-              alignItems="center"
-              width={70}
-              onPress={goBack}>
-              <Icon name="arrowLeft" color="primary" />
-              <Text ml="s8" semibold>
-                Voltar
-              </Text>
-            </TouchableOpacityBox>
-          )}
+          <ScreenWrapperHeader canGoBack={canGoBack} title={title} />
           {children}
         </Box>
       </Container>

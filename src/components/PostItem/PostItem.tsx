@@ -21,6 +21,7 @@ export function PostItem({post}: PostItemProps) {
       <PostImage imageURL={post.imageURL} />
 
       <PostActions
+        id={post.id}
         favoriteCount={post.favoriteCount}
         commentCount={post.commentCount}
         reactionCount={post.reactionCount}

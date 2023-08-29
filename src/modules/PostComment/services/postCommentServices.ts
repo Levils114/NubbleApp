@@ -5,7 +5,7 @@ import {PostComment} from '..';
 import {postCommentApi} from '../api/postCommentApi';
 import {postCommentDto} from '../dtos/PostCommentDto';
 
-async function getPostList(
+async function getPostCommentList(
   postId: number,
   page: number,
 ): Promise<Page<PostComment>> {
@@ -23,6 +23,6 @@ async function getPostList(
   };
 }
 
-export const postService = {
-  getPostList,
+export const postCommentService = {
+  getPostCommentList,
 };

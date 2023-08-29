@@ -2,7 +2,7 @@ import {Post, PostAPI} from '..';
 
 export function postDto(postApi: PostAPI): Post {
   return {
-    id: String(postApi.id),
+    id: postApi.id,
     text: postApi.text,
     imageURL: postApi.image_url,
     commentCount: Number(postApi.meta.comments_count),

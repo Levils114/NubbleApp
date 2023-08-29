@@ -15,6 +15,7 @@ export * from './Icon';
 export * from './PasswordInput/PasswordInput';
 
 export * from './PostItem/PostItem';
+export * from './PostCommentItem/PostCommentItem';
 
 export * from './ScreenWrapper/ScreenWrapper';
 

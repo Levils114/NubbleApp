@@ -14,7 +14,7 @@ export function SuccessScreen({
 
   return (
     <ScreenWrapper>
-      <Icon size="s48" {...params.icon} />
+      <Icon width="s48" height="s48" {...params.icon} />
       <Text preset="headingLarge" mt="s24" mb="s16">
         {params.title}
       </Text>
