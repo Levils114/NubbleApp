@@ -53,6 +53,7 @@ export const lightTheme = createTheme({
     s48: 48,
     s56: 56,
     s70: 70,
+    auto: 'auto',
   },
   borderRadii: {
     s8: 8,

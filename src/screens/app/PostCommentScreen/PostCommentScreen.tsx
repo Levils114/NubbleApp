@@ -5,10 +5,8 @@ import {PostComment, usePostCommentListCases} from '@modules';
 import {useScrollToTop} from '@react-navigation/native';
 import {AppNativeStackScreenParams} from '@types';
 
-import {ScreenWrapper, PostCommentItem} from '@components';
+import {ScreenWrapper, PostCommentItem, TextMessage} from '@components';
 import {useAppSafeArea} from '@hooks';
-
-import {PostCommentFooter} from './components/PostCommentFooter/PostCommentFooter';
 
 export function PostCommentScreen({
   route,
@@ -24,6 +22,10 @@ export function PostCommentScreen({
     return <PostCommentItem postComment={item} />;
   }
 
+  function rendeRefreshControl() {
+    return <RefreshControl refreshing={isLoading} onRefresh={refresh} />;
+  }
+
   return (
     <ScreenWrapper canGoBack title="Comentários" position="relative">
       <FlatList
@@ -32,15 +34,13 @@ export function PostCommentScreen({
         data={list}
         keyExtractor={item => String(item.id)}
         renderItem={renderItem}
-        refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={refresh} />
-        }
+        refreshControl={rendeRefreshControl()}
         refreshing={isLoading}
         onEndReached={fetchNextPage}
         onEndReachedThreshold={0.1}
         contentContainerStyle={{paddingBottom: bottom + 32}}
       />
-      <PostCommentFooter />
+      <TextMessage />
     </ScreenWrapper>
   );
 }

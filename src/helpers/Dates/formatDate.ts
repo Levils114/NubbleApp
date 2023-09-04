@@ -1,28 +1,39 @@
-import {
-  differenceInDays,
-  differenceInWeeks,
-  differenceInMonths,
-  differenceInYears,
-} from 'date-fns';
+import {parseISO, differenceInSeconds, format} from 'date-fns';
 
-export function formatDifferenceBetweenDates(date: string) {
-  const dateToGetDifference = new Date(date);
-  const currentDay = new Date();
+export function formatDifferenceBetweenDates(dateISO: string) {
+  const date = parseISO(dateISO);
+  const now = new Date();
 
-  const differenceBetweenDatesInDays = differenceInDays(
-    currentDay,
-    dateToGetDifference,
-  );
+  const diffInSeconds = differenceInSeconds(now, date);
 
-  switch (true) {
-    case differenceBetweenDatesInDays < 7:
-      return `${differenceBetweenDatesInDays} d`;
-    case differenceBetweenDatesInDays >= 7 && differenceBetweenDatesInDays < 30:
-      return `${differenceInWeeks(currentDay, dateToGetDifference)} sem`;
-    case differenceBetweenDatesInDays >= 30 &&
-      differenceBetweenDatesInDays < 365:
-      return `${differenceInMonths(currentDay, dateToGetDifference)} m`;
-    case differenceBetweenDatesInDays >= 365:
-      return `${differenceInYears(currentDay, dateToGetDifference)} y`;
+  if (diffInSeconds < 60) {
+    return `${diffInSeconds} s`;
   }
+
+  const diffInMinutes = Math.round(diffInSeconds / 60);
+  if (diffInMinutes < 60) {
+    return `${diffInMinutes} m`;
+  }
+
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  if (diffInHours < 24) {
+    return `${diffInHours} h`;
+  }
+
+  const diffInDays = Math.floor(diffInHours / 24);
+  if (diffInDays < 7) {
+    return `${diffInDays} d`;
+  }
+
+  const diffInWeeks = Math.floor(diffInDays / 7);
+  if (diffInWeeks < 4) {
+    return `${diffInWeeks} sem`;
+  }
+
+  const diffInMonths = Math.floor(diffInDays / 30);
+  if (diffInMonths < 12) {
+    return `${diffInMonths} m`;
+  }
+
+  return format(date, 'dd/MM/yyyy');
 }

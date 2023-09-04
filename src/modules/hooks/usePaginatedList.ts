@@ -78,6 +78,7 @@ export function usePaginatedList<Data>(
     list,
     error,
     isLoading,
+    hasNextPage,
     refresh: initialFetch,
     fetchNextPage,
   };

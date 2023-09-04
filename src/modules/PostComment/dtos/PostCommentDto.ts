@@ -1,3 +1,5 @@
+import {formatDifferenceBetweenDates} from '@helpers';
+
 import {PostCommentApi, PostComment} from '..';
 
 export function postCommentDto(postCommentApi: PostCommentApi): PostComment {
@@ -5,6 +7,7 @@ export function postCommentDto(postCommentApi: PostCommentApi): PostComment {
     id: postCommentApi.id,
     message: postCommentApi.message,
     createdAt: postCommentApi.created_at,
+    createdAtRelative: formatDifferenceBetweenDates(postCommentApi.created_at),
     author: {
       id: postCommentApi.user.id,
       name: postCommentApi.user.full_name,

@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   Pressable,
@@ -60,10 +59,8 @@ export function TextInput({
             placeholderTextColor={colors.gray2}
             autoCapitalize="none"
             style={{
-              padding: 0,
-              flexGrow: 1,
-              flexShrink: 1,
               fontFamily: textFontFamilyMap.satoshiRegular,
+              ...textInputStyleDefault,
               ...textFontSizeMap.paragraphMedium,
             }}
             {...props}
@@ -84,3 +81,9 @@ export function TextInput({
     </Box>
   );
 }
+
+export const textInputStyleDefault = {
+  padding: 0,
+  flexGrow: 1,
+  flexShrink: 1,
+};

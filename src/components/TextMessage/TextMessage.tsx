@@ -1,20 +1,33 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {TextInput} from 'react-native';
+import {TextInput, TextInputProps} from 'react-native';
 
-import {Box, Text, textFontSizeMap} from '@components';
+import {
+  Box,
+  Text,
+  textFontSizeMap,
+  TouchableOpacityBox,
+  textInputStyleDefault,
+} from '@components';
 import {useAppSafeArea, useAppTheme} from '@hooks';
 
-export function PostCommentFooter() {
+interface TextMessage extends TextInputProps {
+  value: string;
+  onPressSend(): void;
+}
+
+export function TextMessage({value, onPressSend, ...props}: TextMessage) {
   const {colors} = useAppTheme();
   const {bottom} = useAppSafeArea();
+
+  const isSendButtonDisabled = value?.trim().length !== 0;
 
   return (
     <Box
       flex={1}
       width="100%"
-      paddingHorizontal="s24"
       position="absolute"
+      left={24}
       bottom={bottom + 42}>
       <Box
         flexDirection="row"
@@ -29,12 +42,21 @@ export function PostCommentFooter() {
           placeholderTextColor={colors.gray1}
           style={{
             ...textFontSizeMap.paragraphMedium,
+            ...textInputStyleDefault,
             flex: 0.9,
           }}
+          {...props}
         />
-        <Text color="greenPrimary" bold preset="paragraphSmall">
-          Enviar
-        </Text>
+        <TouchableOpacityBox
+          disabled={isSendButtonDisabled}
+          onPress={onPressSend}>
+          <Text
+            color={isSendButtonDisabled ? 'gray2' : 'greenPrimary'}
+            bold
+            preset="paragraphSmall">
+            Enviar
+          </Text>
+        </TouchableOpacityBox>
       </Box>
     </Box>
   );

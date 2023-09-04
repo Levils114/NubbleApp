@@ -22,3 +22,7 @@ export * from './ScreenWrapper/ScreenWrapper';
 export * from './Text';
 
 export * from './TextInput/TextInput';
+
+export * from './TextMessage/TextMessage';
+
+export * from './UserAvatar/UserAvatar';
