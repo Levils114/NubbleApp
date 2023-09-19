@@ -28,8 +28,6 @@ export function SignUpScreen() {
   });
 
   function onSubmit(data: SignUpFormSchema) {
-    console.log(data);
-
     reset({
       icon: {
         name: 'checkRound',

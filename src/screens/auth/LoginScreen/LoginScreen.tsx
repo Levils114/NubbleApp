@@ -26,9 +26,7 @@ export function LoginScreen({
     resolver: zodResolver(loginFormSchema),
   });
 
-  function handleLogin(data: LoginFormSchema) {
-    console.log(data);
-  }
+  function handleLogin(data: LoginFormSchema) {}
 
   function handleCreateAccount() {
     navigation.navigate('SignUpScreen');

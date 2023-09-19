@@ -22,8 +22,6 @@ export function ForgotPasswordScreen() {
   });
 
   function onSubmit(data: ForgotPasswordFormSchema) {
-    console.log(data);
-
     reset({
       icon: {
         name: 'checkRound',

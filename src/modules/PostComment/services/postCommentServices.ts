@@ -1,7 +1,7 @@
 import {metadataDto} from '@api/';
 import {Page} from 'src/@types/Pages';
 
-import {PostComment} from '..';
+import {CreateCommentParams, PostComment} from '..';
 import {postCommentApi} from '../api/postCommentApi';
 import {postCommentDto} from '../dtos/PostCommentDto';
 
@@ -23,6 +23,19 @@ async function getPostCommentList(
   };
 }
 
+async function createComment({
+  post_id,
+  message,
+}: CreateCommentParams): Promise<PostComment> {
+  const postCommentFromApi = await postCommentApi.createComment({
+    post_id,
+    message,
+  });
+
+  return postCommentDto(postCommentFromApi);
+}
+
 export const postCommentService = {
   getPostCommentList,
+  createComment,
 };

@@ -5,8 +5,10 @@ import {PostComment, usePostCommentListCases} from '@modules';
 import {useScrollToTop} from '@react-navigation/native';
 import {AppNativeStackScreenParams} from '@types';
 
-import {ScreenWrapper, PostCommentItem, TextMessage} from '@components';
+import {ScreenWrapper, PostCommentItem} from '@components';
 import {useAppSafeArea} from '@hooks';
+
+import {PostCommentTextMessage} from './PostCommentTextMessage/PostCommentTextMessage';
 
 export function PostCommentScreen({
   route,
@@ -38,9 +40,9 @@ export function PostCommentScreen({
         refreshing={isLoading}
         onEndReached={fetchNextPage}
         onEndReachedThreshold={0.1}
-        contentContainerStyle={{paddingBottom: bottom + 32}}
+        contentContainerStyle={{paddingBottom: bottom + 42}}
       />
-      <TextMessage />
+      <PostCommentTextMessage postId={postId} />
     </ScreenWrapper>
   );
 }

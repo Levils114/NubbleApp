@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import {TextInput, TextInputProps} from 'react-native';
 
 import {
@@ -13,14 +13,20 @@ import {useAppSafeArea, useAppTheme} from '@hooks';
 
 interface TextMessage extends TextInputProps {
   value: string;
+  onChangeValue: Dispatch<SetStateAction<string>>;
   onPressSend(): void;
 }
 
-export function TextMessage({value, onPressSend, ...props}: TextMessage) {
+export function TextMessage({
+  value,
+  onChangeValue,
+  onPressSend,
+  ...props
+}: TextMessage) {
   const {colors} = useAppTheme();
   const {bottom} = useAppSafeArea();
 
-  const isSendButtonDisabled = value?.trim().length !== 0;
+  const isSendButtonDisabled = value?.trim().length === 0;
 
   return (
     <Box
@@ -38,8 +44,10 @@ export function TextMessage({value, onPressSend, ...props}: TextMessage) {
         backgroundColor="gray5"
         borderRadius="s12">
         <TextInput
+          value={value}
           placeholder="Adicione um comentário"
           placeholderTextColor={colors.gray1}
+          onChangeText={onChangeValue}
           style={{
             ...textFontSizeMap.paragraphMedium,
             ...textInputStyleDefault,
