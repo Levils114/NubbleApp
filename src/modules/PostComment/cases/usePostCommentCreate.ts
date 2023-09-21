@@ -1,27 +1,24 @@
-/* eslint-disable no-catch-shadow */
-import React from 'react';
+import {useMutation, UseMutationOptions} from '@infra';
 
 import {PostComment, postCommentService} from '..';
 
-export function usePostCommentCreate(postId: number) {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState<unknown>();
+export function usePostCommentCreate(
+  postId: number,
+  options?: UseMutationOptions<PostComment>,
+) {
+  const {mutate, isLoading, error} = useMutation(
+    postCommentService.createComment,
+    options,
+  );
 
-  async function createPost(message: string): Promise<PostComment | undefined> {
-    setIsLoading(true);
-    setError(null);
+  async function createPost(message: string): Promise<PostComment | void> {
+    const postComment = await mutate({
+      post_id: postId,
+      message,
+    });
 
-    try {
-      const postComment = await postCommentService.createComment({
-        post_id: postId,
-        message,
-      });
-
+    if (postComment) {
       return postComment;
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
     }
   }
 

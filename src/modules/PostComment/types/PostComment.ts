@@ -9,4 +9,7 @@ export interface PostComment {
     name: string;
     userName: string;
   };
+  postData: {
+    userId?: number;
+  };
 }

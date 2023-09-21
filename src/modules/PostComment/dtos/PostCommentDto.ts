@@ -14,5 +14,8 @@ export function postCommentDto(postCommentApi: PostCommentApi): PostComment {
       userName: postCommentApi.user.username,
       profileURL: postCommentApi.user.profile_url,
     },
+    postData: {
+      userId: postCommentApi.post?.user_id,
+    },
   };
 }

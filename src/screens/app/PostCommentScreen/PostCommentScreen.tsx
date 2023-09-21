@@ -15,13 +15,24 @@ export function PostCommentScreen({
 }: AppNativeStackScreenParams<'PostCommentScreen'>) {
   const {bottom} = useAppSafeArea();
   const {postId} = route.params;
-  const {list, isLoading, fetchNextPage, refresh} =
-    usePostCommentListCases(postId);
+  const {
+    list,
+    isLoading,
+    fetchNextPage,
+    refresh,
+    addElementToListBegin,
+    removeElementFromList,
+  } = usePostCommentListCases(postId);
   const flatListRef = React.useRef<FlatList<PostComment>>(null);
   useScrollToTop(flatListRef);
 
   function renderItem({item}: ListRenderItemInfo<PostComment>) {
-    return <PostCommentItem postComment={item} />;
+    return (
+      <PostCommentItem
+        postComment={item}
+        onDeleteCommentSuccess={removeElementFromList}
+      />
+    );
   }
 
   function rendeRefreshControl() {
@@ -40,9 +51,14 @@ export function PostCommentScreen({
         refreshing={isLoading}
         onEndReached={fetchNextPage}
         onEndReachedThreshold={0.1}
-        contentContainerStyle={{paddingBottom: bottom + 42}}
+        contentContainerStyle={{
+          paddingBottom: bottom + 42,
+        }}
       />
-      <PostCommentTextMessage postId={postId} />
+      <PostCommentTextMessage
+        postId={postId}
+        onCreateCommentSuccess={addElementToListBegin}
+      />
     </ScreenWrapper>
   );
 }

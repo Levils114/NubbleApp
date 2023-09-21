@@ -1,4 +1,4 @@
-import {UserApi} from '@modules';
+import {PostAPI, UserApi} from '@modules';
 
 export interface PostCommentApi {
   id: number;
@@ -8,5 +8,6 @@ export interface PostCommentApi {
   created_at: string;
   updated_at: string;
   user: UserApi;
+  post?: PostAPI;
   meta: any;
 }

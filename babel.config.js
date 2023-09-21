@@ -13,6 +13,7 @@ module.exports = {
           '@global': './src/global',
           '@helpers': './src/helpers',
           '@hooks': './src/hooks',
+          '@infra': './src/infra',
           '@modules': './src/modules',
           '@routes': './src/routes',
           '@screens': './src/screens',

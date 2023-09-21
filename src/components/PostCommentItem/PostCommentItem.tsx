@@ -1,32 +1,52 @@
 import React from 'react';
+import {Alert, Pressable} from 'react-native';
 
-import {PostComment} from '@modules';
+import {PostComment, usePostCommentDelete} from '@modules';
 
 import {Box, Text, UserAvatar} from '@components';
 
 interface PostCommentItemProps {
   postComment: PostComment;
+  onDeleteCommentSuccess: (element: PostComment) => void;
 }
 
-export function PostCommentItem({postComment}: PostCommentItemProps) {
+export function PostCommentItem({
+  postComment,
+  onDeleteCommentSuccess,
+}: PostCommentItemProps) {
+  const {deleteComment} = usePostCommentDelete(postComment, {
+    onSuccess: () => onDeleteCommentSuccess(postComment),
+  });
+
+  function handleDeleteComment() {
+    if (postComment.author.id === 1 || postComment.postData.userId === 1) {
+      Alert.alert('Tem certeza que deseja deletar o comentário?', undefined, [
+        {text: 'Não', onPress: () => {}},
+        {text: 'Sim', onPress: deleteComment},
+      ]);
+    }
+  }
+
   return (
-    <Box
-      gap="s16"
-      mb="s32"
-      flexDirection="row"
-      alignItems="center"
-      justifyContent="flex-start">
-      <UserAvatar userAvatar={postComment.author.profileURL} />
+    <Pressable onLongPress={handleDeleteComment}>
+      <Box
+        gap="s16"
+        mb="s32"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="flex-start">
+        <UserAvatar userAvatar={postComment.author.profileURL} />
 
-      <Box flex={1}>
-        <Text preset="paragraphSmall" bold>
-          {postComment.author.name}
-        </Text>
+        <Box flex={1}>
+          <Text preset="paragraphSmall" bold>
+            {postComment.author.name}
+          </Text>
 
-        <Text preset="paragraphSmall">
-          {`${postComment.message} - ${postComment.createdAtRelative}`}
-        </Text>
+          <Text preset="paragraphSmall">
+            {`${postComment.message} - ${postComment.createdAtRelative}`}
+          </Text>
+        </Box>
       </Box>
-    </Box>
+    </Pressable>
   );
 }

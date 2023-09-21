@@ -1,18 +1,26 @@
 import React from 'react';
 import {Keyboard} from 'react-native';
 
-import {usePostCommentCreate} from '@modules';
+import {PostComment, usePostCommentCreate} from '@modules';
 
 import {TextMessage} from '@components';
 
 interface PostCommentTextMessageProps {
   postId: number;
+  onCreateCommentSuccess: (element: PostComment) => void;
 }
 
-export function PostCommentTextMessage({postId}: PostCommentTextMessageProps) {
+export function PostCommentTextMessage({
+  postId,
+  onCreateCommentSuccess,
+}: PostCommentTextMessageProps) {
   const [message, setMessage] = React.useState('');
 
-  const {createPost} = usePostCommentCreate(postId);
+  const {createPost} = usePostCommentCreate(postId, {
+    onSuccess: postComment => {
+      onCreateCommentSuccess(postComment!);
+    },
+  });
 
   async function onPressSend() {
     await createPost(message);

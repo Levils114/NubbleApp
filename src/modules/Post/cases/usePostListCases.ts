@@ -1,4 +1,4 @@
-import {usePaginatedList} from '@modules';
+import {usePaginatedList} from '@infra';
 
 import {Post, postService} from '..';
 

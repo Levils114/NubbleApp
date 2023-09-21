@@ -74,6 +74,18 @@ export function usePaginatedList<Data>(
     }
   }
 
+  function addElementToListBegin(element: Data) {
+    setList(prevValue => [element, ...prevValue]);
+  }
+
+  function removeElementFromList(element: Data) {
+    const newListWithoutElement = list.filter(
+      listElement => listElement !== element,
+    );
+
+    setList(newListWithoutElement);
+  }
+
   return {
     list,
     error,
@@ -81,5 +93,7 @@ export function usePaginatedList<Data>(
     hasNextPage,
     refresh: initialFetch,
     fetchNextPage,
+    addElementToListBegin,
+    removeElementFromList,
   };
 }

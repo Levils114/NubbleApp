@@ -35,7 +35,14 @@ async function createComment({
   return postCommentDto(postCommentFromApi);
 }
 
+async function deleteComment(postComment: PostComment) {
+  await postCommentApi.deleteComment(postComment.id);
+
+  return postComment;
+}
+
 export const postCommentService = {
   getPostCommentList,
   createComment,
+  deleteComment,
 };
