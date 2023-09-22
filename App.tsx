@@ -4,6 +4,7 @@ import {lightTheme} from '@global/theme/lightTheme';
 import {ThemeProvider} from '@shopify/restyle';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
+import {Toast} from '@components';
 import {Routes} from '@routes';
 
 function App(): JSX.Element {
@@ -11,6 +12,8 @@ function App(): JSX.Element {
     <SafeAreaProvider>
       <ThemeProvider theme={lightTheme}>
         <Routes />
+
+        <Toast />
       </ThemeProvider>
     </SafeAreaProvider>
   );

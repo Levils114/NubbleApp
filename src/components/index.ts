@@ -21,6 +21,8 @@ export * from './ScreenWrapper/ScreenWrapper';
 
 export * from './Text';
 
+export * from './Toast/Toast';
+
 export * from './TextInput/TextInput';
 
 export * from './TextMessage/TextMessage';
