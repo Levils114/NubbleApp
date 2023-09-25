@@ -11,6 +11,7 @@ import CheckRound from '@assets/icons/check-round.svg';
 import Check from '@assets/icons/check.svg';
 import ChevronRight from '@assets/icons/chevron-right.svg';
 import Comment from '@assets/icons/comment.svg';
+import ErrorRound from '@assets/icons/error-round.svg';
 import EyeOff from '@assets/icons/eye-off.svg';
 import EyeOn from '@assets/icons/eye-on.svg';
 import FlashOff from '@assets/icons/flash-off.svg';
@@ -45,6 +46,7 @@ export const icons = {
   checkRound: CheckRound,
   chevronRight: ChevronRight,
   comment: Comment,
+  errorRound: ErrorRound,
   flashOff: FlashOff,
   flashOn: FlashOn,
   heartFill: HeartFill,

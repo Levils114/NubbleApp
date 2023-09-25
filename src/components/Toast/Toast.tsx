@@ -1,61 +1,92 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Dimensions} from 'react-native';
+import {Animated, ViewProps} from 'react-native';
 
-import {useToast} from '@services';
+import {IToast, useToast, useToastService} from '@services';
 
 import {useAppSafeArea} from '@hooks';
 
-import {Box} from '../Box';
-import {Icon} from '../Icon';
-import {Text} from '../Text';
+import {IconProps} from '../Icon';
 
-const MAX_WIDTH = Dimensions.get('window').width * 0.9;
+import {ToastContent} from './components/ToastContent';
+
+const DEFAULT_DURATION = 2000; // 2 seconds
 
 export function Toast() {
-  const {toast, hideToast} = useToast();
-  const {bottom} = useAppSafeArea();
+  const {hideToast} = useToastService();
+  const {toast} = useToast();
+  const {bottom, top} = useAppSafeArea();
+
+  const fadeAnimated = React.useRef(new Animated.Value(0)).current;
+
+  const runEntiringAnimation = React.useCallback(() => {
+    Animated.timing(fadeAnimated, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeAnimated]);
+
+  const runExitingAnimation = React.useCallback(() => {
+    Animated.timing(fadeAnimated, {
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start(hideToast);
+  }, [fadeAnimated, hideToast]);
 
   React.useEffect(() => {
-    const toastTimeout = setTimeout(() => {
-      hideToast();
-    }, 2000);
+    let toastTimeout: NodeJS.Timeout;
+
+    if (toast) {
+      const toastDuration = toast?.duration || DEFAULT_DURATION;
+
+      runEntiringAnimation();
+
+      toastTimeout = setTimeout(() => {
+        runExitingAnimation();
+      }, toastDuration);
+    }
 
     return () => {
-      clearTimeout(toastTimeout);
+      if (toastTimeout) {
+        clearTimeout(toastTimeout);
+      }
     };
-  }, [toast, hideToast]);
+  }, [toast, hideToast, runEntiringAnimation, runExitingAnimation]);
+
+  const toastPositionStyles: Record<
+    Required<IToast>['position'],
+    ViewProps['style']
+  > = {
+    top: {
+      top: top + 42,
+    },
+    bottom: {
+      bottom: bottom + 42,
+    },
+  };
+
+  const toastIcon: Record<IToast['type'], IconProps['name']> = {
+    success: 'checkRound',
+    error: 'errorRound',
+  };
 
   if (!toast) {
     return null;
   }
 
   return (
-    <Box
-      position="absolute"
-      bottom={bottom + 24}
-      backgroundColor="background"
-      borderRadius="s16"
-      padding="s16"
-      alignItems="center"
-      alignSelf="center"
-      shadowColor="backgroundContrast"
-      justifyContent="flex-start"
-      flexDirection="row"
-      {...toastStyles}>
-      <Icon name="checkRound" width="s32" height="s32" />
-      <Text ml="s16" preset="paragraphMedium" bold style={{flexShrink: 1}}>
-        {toast?.message}
-      </Text>
-    </Box>
+    <Animated.View
+      style={[
+        {
+          position: 'absolute',
+          alignSelf: 'center',
+          opacity: fadeAnimated,
+        },
+        toastPositionStyles[toast?.position || 'bottom'],
+      ]}>
+      <ToastContent toast={toast} toastIcon={toastIcon[toast.type]} />
+    </Animated.View>
   );
 }
-
-const toastStyles = {
-  maxWidth: MAX_WIDTH,
-  shadowOffset: {width: 0, height: -3},
-  shadowOpacity: 0.05,
-  shadowRadius: 12,
-  elevation: 10,
-  opacity: 0.95,
-};

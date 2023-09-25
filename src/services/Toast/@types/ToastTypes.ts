@@ -1,6 +1,7 @@
 export interface IToast {
   message: string;
   type: 'success' | 'error';
+  position?: 'top' | 'bottom';
   duration?: number;
   action?: {
     title: string;

@@ -2,7 +2,7 @@ import React from 'react';
 import {Alert, Pressable} from 'react-native';
 
 import {PostComment, usePostCommentDelete} from '@modules';
-import {useToast} from '@services';
+import {useToastService} from '@services';
 
 import {Box, Text, UserAvatar} from '@components';
 
@@ -15,7 +15,7 @@ export function PostCommentItem({
   postComment,
   onDeleteCommentSuccess,
 }: PostCommentItemProps) {
-  const {showToast} = useToast();
+  const {showToast} = useToastService();
   const {deleteComment} = usePostCommentDelete(postComment, {
     onSuccess: () => {
       onDeleteCommentSuccess(postComment);
