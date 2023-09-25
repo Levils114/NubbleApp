@@ -2,6 +2,7 @@ import React from 'react';
 import {Alert, Pressable} from 'react-native';
 
 import {PostComment, usePostCommentDelete} from '@modules';
+import {useToast} from '@services';
 
 import {Box, Text, UserAvatar} from '@components';
 
@@ -14,8 +15,15 @@ export function PostCommentItem({
   postComment,
   onDeleteCommentSuccess,
 }: PostCommentItemProps) {
+  const {showToast} = useToast();
   const {deleteComment} = usePostCommentDelete(postComment, {
-    onSuccess: () => onDeleteCommentSuccess(postComment),
+    onSuccess: () => {
+      onDeleteCommentSuccess(postComment);
+      showToast({
+        type: 'success',
+        message: 'Comentário deletado',
+      });
+    },
   });
 
   function handleDeleteComment() {

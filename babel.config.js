@@ -14,6 +14,7 @@ module.exports = {
           '@helpers': './src/helpers',
           '@hooks': './src/hooks',
           '@infra': './src/infra',
+          '@services': './src/services',
           '@modules': './src/modules',
           '@routes': './src/routes',
           '@screens': './src/screens',
