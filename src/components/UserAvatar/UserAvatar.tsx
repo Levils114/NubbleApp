@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, ImageProps} from 'react-native';
 
 interface UserAvatarProps extends Omit<ImageProps, 'source'> {
-  userAvatar: string;
+  userAvatar?: string;
 }
 
 export function UserAvatar({userAvatar, ...props}: UserAvatarProps) {
