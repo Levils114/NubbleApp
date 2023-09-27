@@ -5,6 +5,7 @@ export const postListMock: Post[] = [
     id: 1,
     text: 'This is my first post!',
     author: {
+      id: 1,
       profileURL: 'https://i.imgur.com/YeE3yKf.jpg',
       name: 'John Doe',
       userName: 'johndoe',
@@ -18,6 +19,7 @@ export const postListMock: Post[] = [
     id: 2,
     text: 'Check out this cool photo!',
     author: {
+      id: 1,
       profileURL: 'https://i.imgur.com/BrJUnRl.jpg',
       name: 'Jane Smith',
       userName: 'janesmith',
@@ -31,6 +33,7 @@ export const postListMock: Post[] = [
     id: 3,
     text: "Just finished reading this book and it's amazing!",
     author: {
+      id: 1,
       profileURL: 'https://i.imgur.com/BxgHDci.jpg',
       name: 'Mark Johnson',
       userName: 'markjohnson',
@@ -44,6 +47,7 @@ export const postListMock: Post[] = [
     id: 4,
     text: "I can't believe it's already May!",
     author: {
+      id: 1,
       profileURL: 'https://i.imgur.com/FmSbPv3.jpg',
       name: 'Amy Lee',
       userName: 'amylee',
@@ -57,6 +61,7 @@ export const postListMock: Post[] = [
     id: 5,
     text: 'Coding day!',
     author: {
+      id: 1,
       profileURL: 'https://i.imgur.com/DF4Jfxq.jpg',
       name: 'Santiago Emilio',
       userName: 'sanemilio',
@@ -70,6 +75,7 @@ export const postListMock: Post[] = [
     id: 6,
     text: "What's your favorite color?",
     author: {
+      id: 1,
       profileURL: 'https://i.imgur.com/YeE3yKf.jpg',
       name: 'John Doe',
       userName: 'johndoe',
@@ -83,6 +89,7 @@ export const postListMock: Post[] = [
     id: 7,
     text: "I'm so excited for the weekend!",
     author: {
+      id: 1,
       profileURL: 'https://i.imgur.com/BrJUnRl.jpg',
       name: 'Jane Smith',
       userName: 'janesmith',
@@ -96,6 +103,7 @@ export const postListMock: Post[] = [
     id: 8,
     text: 'Just got back from vacation and it was amazing!',
     author: {
+      id: 1,
       profileURL: 'https://i.imgur.com/BxgHDci.jpg',
       name: 'Mark Johnson',
       userName: 'markjohnson',
@@ -110,6 +118,7 @@ export const postListMock: Post[] = [
     text: "I'm loving this new restaurant!",
     imageURL: 'https://i.imgur.com/FmSbPv3.jpg',
     author: {
+      id: 1,
       profileURL: 'https://i.imgur.com/OGQRFok.jpg',
       name: 'Amy Lee',
       userName: 'amylee',
