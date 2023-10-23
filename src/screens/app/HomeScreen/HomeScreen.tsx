@@ -13,7 +13,7 @@ import {HomeHeader} from './components/HomeHeader/HomeHeader';
 export function HomeScreen() {
   const flatListRef = React.useRef<FlatList<Post>>(null);
   useScrollToTop(flatListRef);
-  const {list, error, isLoading, refresh, fetchNextPage} = usePostListCases();
+  const {list, isError, isLoading, refresh, fetchNextPage} = usePostListCases();
 
   function renderItem({item}: ListRenderItemInfo<Post>) {
     return <PostItem post={item} />;
@@ -25,7 +25,11 @@ export function HomeScreen() {
 
   function renderListEmptyComponent() {
     return (
-      <HomeEmpty isLoading={isLoading} error={error} handleRefetch={refresh} />
+      <HomeEmpty
+        isLoading={isLoading}
+        error={isError}
+        handleRefetch={refresh}
+      />
     );
   }
 
