@@ -5,6 +5,10 @@ export interface UseMutationOptions<IResponse> {
   errorMessage?: string;
 }
 
+/**
+ * @deprecated use useMutation from @tanstack/react-query
+ */
+
 export function useMutation<IVariables, IResponse>(
   mutationFn: (variables: IVariables) => Promise<IResponse>,
   options?: UseMutationOptions<IResponse>,

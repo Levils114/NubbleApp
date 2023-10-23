@@ -3,3 +3,4 @@ export * from './AppNativeStackScreenParams';
 export * from './AppTabNavigatorScreenParams';
 
 export * from './reactNavigation';
+export * from './Pages';

@@ -12,6 +12,7 @@ export function useUserGetInfo(id: number) {
   } = useQuery<UserType>({
     queryKey: [QueryKeys.UserGetInfo, id],
     queryFn: () => userServices.getUser(id),
+    staleTime: 30000, // 30 seconds
   });
 
   return {
