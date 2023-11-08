@@ -1,6 +1,8 @@
 import React from 'react';
 
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useAuthLogin} from '@modules';
+import {useToastService} from '@services';
 import {AuthNativeStackScreenProps} from '@types';
 import {useForm} from 'react-hook-form';
 
@@ -17,6 +19,10 @@ import {loginFormSchema, LoginFormSchema} from './loginFormSchema';
 export function LoginScreen({
   navigation,
 }: AuthNativeStackScreenProps<'LoginScreen'>) {
+  const {showToast} = useToastService();
+  const {authLogin, isLoading} = useAuthLogin({
+    onError: error => showToast({message: error, type: 'error'}),
+  });
   const {control, formState, handleSubmit} = useForm<LoginFormSchema>({
     defaultValues: {
       email: '',
@@ -26,7 +32,9 @@ export function LoginScreen({
     resolver: zodResolver(loginFormSchema),
   });
 
-  function handleLogin(data: LoginFormSchema) {}
+  async function handleLogin(data: LoginFormSchema) {
+    authLogin(data);
+  }
 
   function handleCreateAccount() {
     navigation.navigate('SignUpScreen');
@@ -72,6 +80,7 @@ export function LoginScreen({
       <Button
         text="Entrar"
         mt="s48"
+        loading={isLoading}
         disabled={!formState.isValid}
         onPress={handleSubmit(handleLogin)}
       />
