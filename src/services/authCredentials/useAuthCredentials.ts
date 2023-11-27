@@ -1,16 +1,6 @@
-import {create} from 'zustand';
-
 import {IAuthCredentialsService} from './authCredentialsTypes';
+import {useAuthCredentialsContextVersion} from './Providers/AuthCredentialsProviders';
 
 export function useAuthCredentials(): IAuthCredentialsService {
-  return useAuthCredentialsZustandVersion();
+  return useAuthCredentialsContextVersion();
 }
-
-const useAuthCredentialsZustandVersion = create<IAuthCredentialsService>(
-  set => ({
-    authCredentials: null,
-    isLoading: false,
-    saveCredentials: async authCredentials => set({authCredentials}),
-    removeCredentials: async () => set({authCredentials: null}),
-  }),
-);

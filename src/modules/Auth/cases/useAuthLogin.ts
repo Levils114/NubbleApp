@@ -22,7 +22,6 @@ export function useAuthLogin(
         options.onSuccess;
       }
 
-      authServices.updateToken(token);
       await saveCredentials({token, user});
     },
     onError: error => {

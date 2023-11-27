@@ -2,7 +2,7 @@ import React from 'react';
 
 import {AppTabNavigatorScreenParams} from '@types';
 
-import {Button, ScreenWrapper, Text} from '@components';
+import {Icon, ScreenWrapper} from '@components';
 
 export function ProfileScreen({
   navigation,
@@ -13,10 +13,7 @@ export function ProfileScreen({
 
   return (
     <ScreenWrapper>
-      <Text preset="headingLarge" textAlign="center">
-        ProfileScreen
-      </Text>
-      <Button text="Settings" onPress={handleGoToSettingsScreen} />
+      <Icon name="settings" onPress={handleGoToSettingsScreen} />
     </ScreenWrapper>
   );
 }
