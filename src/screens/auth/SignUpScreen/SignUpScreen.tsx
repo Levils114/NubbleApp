@@ -1,7 +1,8 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 
 import {zodResolver} from '@hookform/resolvers/zod';
-import {useAuthSignUp} from '@modules';
+import {useAuthSignUp, useAuthIsValueAvailable} from '@modules';
 import {useForm} from 'react-hook-form';
 
 import {
@@ -10,6 +11,7 @@ import {
   Text,
   FormTextInput,
   FormPasswordInput,
+  ActivityIndicator,
 } from '@components';
 import {useResetNavigationSuccess} from '@hooks';
 
@@ -30,16 +32,25 @@ export function SignUpScreen() {
       });
     },
   });
-  const {control, formState, handleSubmit} = useForm<SignUpFormSchema>({
-    defaultValues: {
-      username: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-    },
-    mode: 'onChange',
-    resolver: zodResolver(signUpFormSchema),
+  const {control, formState, handleSubmit, watch, getFieldState} =
+    useForm<SignUpFormSchema>({
+      defaultValues: {
+        username: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+      },
+      mode: 'onChange',
+      resolver: zodResolver(signUpFormSchema),
+    });
+
+  const username = watch('username');
+  const usernameState = getFieldState('username');
+  const usernameIsValid = !usernameState.invalid && usernameState.isDirty;
+  const usernameQuery = useAuthIsValueAvailable({
+    username,
+    enabled: usernameIsValid,
   });
 
   function onSubmit(data: SignUpFormSchema) {
@@ -56,8 +67,16 @@ export function SignUpScreen() {
         control={control}
         name="username"
         label="Seu username"
+        errorMessage={
+          usernameQuery.isUnavailable ? 'Username indisponível' : undefined
+        }
         placeholder="@"
         boxProps={{mb: 's20'}}
+        rightComponent={
+          usernameQuery.isLoading
+            ? () => <ActivityIndicator size={'small'} />
+            : undefined
+        }
       />
 
       <FormTextInput
@@ -96,7 +115,11 @@ export function SignUpScreen() {
         text="Criar minha conta"
         onPress={handleSubmit(onSubmit)}
         loading={isLoading}
-        disabled={!formState.isValid}
+        disabled={
+          !formState.isValid ||
+          usernameQuery.isLoading ||
+          usernameQuery.isUnavailable
+        }
       />
     </ScreenWrapper>
   );

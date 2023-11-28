@@ -4,6 +4,7 @@ import {UserApi} from '@modules';
 import {IAuthApi} from '../types/IAuthApi';
 import {IAuthLogoutResponse} from '../types/IAuthLogoutResponse';
 import {IAuthSignUpForm} from '../types/IAuthSignUp';
+import {IFieldIsAvailableApi} from '../types/IFieldIsAvailableApi';
 
 export async function authLogin(
   email: string,
@@ -31,8 +32,30 @@ export async function authSignUp(
   return data;
 }
 
+async function isUserNameAvailable(params: {
+  username: string;
+}): Promise<IFieldIsAvailableApi> {
+  const response = await api.get<IFieldIsAvailableApi>('/validate-username', {
+    params,
+  });
+
+  return response.data;
+}
+
+async function isEmailAvailable(params: {
+  email: string;
+}): Promise<IFieldIsAvailableApi> {
+  const response = await api.get<IFieldIsAvailableApi>('/validate-email', {
+    params,
+  });
+
+  return response.data;
+}
+
 export const authApi = {
   authLogin,
   authLogout,
   authSignUp,
+  isUserNameAvailable,
+  isEmailAvailable,
 };

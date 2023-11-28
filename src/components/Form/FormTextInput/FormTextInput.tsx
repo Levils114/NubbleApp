@@ -7,6 +7,7 @@ import {TextInput, TextInputProps} from '@components';
 export function FormTextInput<FormType extends FieldValues>({
   control,
   name,
+  errorMessage,
   ...textInputProps
 }: TextInputProps & UseControllerProps<FormType>) {
   return (
@@ -17,7 +18,7 @@ export function FormTextInput<FormType extends FieldValues>({
         <TextInput
           value={field.value}
           onChangeText={field.onChange}
-          errorMessage={fieldState.error?.message}
+          errorMessage={fieldState.error?.message || errorMessage}
           {...textInputProps}
         />
       )}
