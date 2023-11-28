@@ -1,8 +1,10 @@
 import {api} from '@api/';
+import {UserDto, UserType} from '@modules';
 
 import {authApi} from '../api/authApi';
 import {authAdapter} from '../dtos/authAdapter';
 import {IAuthCredentials} from '../types/IAuthCredentials';
+import {IAuthSignUpForm} from '../types/IAuthSignUp';
 
 export async function authLogin(
   email: string,
@@ -28,6 +30,19 @@ export async function authLogout(): Promise<string> {
   }
 }
 
+export async function authSignUp(
+  authSignUpProps: IAuthSignUpForm,
+): Promise<UserType> {
+  try {
+    const authApiReponse = await authApi.authSignUp(authSignUpProps);
+    const authApiResponseFormatted = UserDto(authApiReponse);
+
+    return authApiResponseFormatted;
+  } catch (error) {
+    throw new Error('Ocorreu um erro! Tente novamente');
+  }
+}
+
 function updateToken(token: string) {
   api.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
@@ -39,6 +54,7 @@ function removeToken() {
 export const authServices = {
   authLogin,
   authLogout,
+  authSignUp,
   updateToken,
   removeToken,
 };

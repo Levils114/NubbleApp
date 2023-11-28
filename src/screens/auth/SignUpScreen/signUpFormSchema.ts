@@ -8,7 +8,8 @@ const userNameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
 
 export const signUpFormSchema = z.object({
   username: z.string().regex(userNameRegex, 'Username inválido').toLowerCase(),
-  fullname: z.string().nonempty('Nome completo obrigatório'),
+  firstName: z.string().nonempty('Nome obrigatório'),
+  lastName: z.string().nonempty('Nome obrigatório'),
   email: getEmailAttributeSchema(),
   password: getSignUpPasswordAttributeSchema(),
 });

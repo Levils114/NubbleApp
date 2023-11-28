@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface UseMutationOptions<IResponse> {
   onSuccess?: (data?: IResponse) => void;
+  onError?: (message: string) => void;
   errorMessage?: string;
 }
 

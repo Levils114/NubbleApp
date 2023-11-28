@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useAuthSignUp} from '@modules';
 import {useForm} from 'react-hook-form';
 
 import {
@@ -16,10 +17,24 @@ import {SignUpFormSchema, signUpFormSchema} from './signUpFormSchema';
 
 export function SignUpScreen() {
   const {reset} = useResetNavigationSuccess();
+
+  const {signUp, isLoading} = useAuthSignUp({
+    onSuccess: () => {
+      reset({
+        icon: {
+          name: 'checkRound',
+          color: 'background',
+        },
+        title: 'Sua conta foi criada com sucesso!',
+        subtitle: 'Agora é só fazer login na nossa plataforma',
+      });
+    },
+  });
   const {control, formState, handleSubmit} = useForm<SignUpFormSchema>({
     defaultValues: {
       username: '',
-      fullname: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
     },
@@ -28,14 +43,7 @@ export function SignUpScreen() {
   });
 
   function onSubmit(data: SignUpFormSchema) {
-    reset({
-      icon: {
-        name: 'checkRound',
-        color: 'background',
-      },
-      title: 'Sua conta foi criada com sucesso!',
-      subtitle: 'Agora é só fazer login na nossa plataforma',
-    });
+    signUp(data);
   }
 
   return (
@@ -54,9 +62,18 @@ export function SignUpScreen() {
 
       <FormTextInput
         control={control}
-        name="fullname"
-        label="Nome completo"
-        placeholder="Digite seu nome completo"
+        name="firstName"
+        label="Primeiro nome"
+        placeholder="Digite seu nome"
+        boxProps={{mb: 's20'}}
+        autoCapitalize="words"
+      />
+
+      <FormTextInput
+        control={control}
+        name="lastName"
+        label="Sobrenome"
+        placeholder="Digite seu sobrenome"
         boxProps={{mb: 's20'}}
         autoCapitalize="words"
       />
@@ -78,6 +95,7 @@ export function SignUpScreen() {
       <Button
         text="Criar minha conta"
         onPress={handleSubmit(onSubmit)}
+        loading={isLoading}
         disabled={!formState.isValid}
       />
     </ScreenWrapper>
