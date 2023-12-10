@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useForgotPassword} from '@modules';
 import {useForm} from 'react-hook-form';
 
 import {Button, ScreenWrapper, Text, FormTextInput} from '@components';
@@ -13,23 +14,31 @@ import {
 
 export function ForgotPasswordScreen() {
   const {reset} = useResetNavigationSuccess();
-  const {control, formState, handleSubmit} = useForm<ForgotPasswordFormSchema>({
-    defaultValues: {
-      email: '',
+  const {control, formState, handleSubmit, setError} =
+    useForm<ForgotPasswordFormSchema>({
+      defaultValues: {
+        email: '',
+      },
+      resolver: zodResolver(forgotPasswordFormSchema),
+      mode: 'onChange',
+    });
+  const {mutate, isLoading} = useForgotPassword({
+    onSuccess: () =>
+      reset({
+        icon: {
+          name: 'checkRound',
+          color: 'background',
+        },
+        title: 'Sua conta foi criada com sucesso!',
+        subtitle: 'Agora é só fazer login na nossa plataforma',
+      }),
+    onError: error => {
+      setError('email', {message: error?.message});
     },
-    resolver: zodResolver(forgotPasswordFormSchema),
-    mode: 'onChange',
   });
 
   function onSubmit(data: ForgotPasswordFormSchema) {
-    reset({
-      icon: {
-        name: 'checkRound',
-        color: 'background',
-      },
-      title: 'Sua conta foi criada com sucesso!',
-      subtitle: 'Agora é só fazer login na nossa plataforma',
-    });
+    mutate(data);
   }
 
   return (
@@ -54,6 +63,7 @@ export function ForgotPasswordScreen() {
       <Button
         text="Recuperar senha"
         disabled={!formState.isValid}
+        loading={isLoading}
         onPress={handleSubmit(onSubmit)}
       />
     </ScreenWrapper>

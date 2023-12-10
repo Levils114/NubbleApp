@@ -60,6 +60,16 @@ function removeToken() {
   api.defaults.headers.common.Authorization = null;
 }
 
+async function forgotPassword(email: string): Promise<string> {
+  try {
+    const message = await authApi.forgotPassword(email);
+
+    return message;
+  } catch (error) {
+    throw new Error('Ocorreu um erro! Tente novamente');
+  }
+}
+
 export const authServices = {
   authLogin,
   authLogout,
@@ -68,4 +78,5 @@ export const authServices = {
   isEmailAvailable,
   updateToken,
   removeToken,
+  forgotPassword,
 };

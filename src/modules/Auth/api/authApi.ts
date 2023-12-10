@@ -52,10 +52,23 @@ async function isEmailAvailable(params: {
   return response.data;
 }
 
+async function forgotPassword(email: string): Promise<string> {
+  const {data} = await api.post<{message: string}>(
+    '/forgot-password',
+    undefined,
+    {
+      params: {email},
+    },
+  );
+
+  return data.message;
+}
+
 export const authApi = {
   authLogin,
   authLogout,
   authSignUp,
   isUserNameAvailable,
   isEmailAvailable,
+  forgotPassword,
 };
