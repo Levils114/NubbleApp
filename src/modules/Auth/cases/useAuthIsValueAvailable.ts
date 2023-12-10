@@ -3,25 +3,45 @@ import {useQuery} from '@tanstack/react-query';
 
 import {useDebounce} from '@hooks';
 
-import {authServices} from '..';
+import {authServices} from './../services/authServices';
 
-interface Params {
-  username: string;
-  enabled: boolean;
+export enum ValuesToValidate {
+  EMAIL = 'email',
+  USERNAME = 'username',
 }
 
-export function useAuthIsValueAvailable({username, enabled}: Params) {
-  const usenameDebounced = useDebounce(username, 1500);
+interface Params {
+  value: string;
+  enabled: boolean;
+  valueToValidate: ValuesToValidate;
+}
+
+const functionsToRequest: Record<ValuesToValidate, any> = {
+  [ValuesToValidate.EMAIL]: authServices.isEmailAvailable,
+  [ValuesToValidate.USERNAME]: authServices.isUserNameAvailable,
+};
+
+const keys: Record<ValuesToValidate, QueryKeys> = {
+  [ValuesToValidate.EMAIL]: QueryKeys.IsEmailAvailable,
+  [ValuesToValidate.USERNAME]: QueryKeys.IsUserNameAvailable,
+};
+
+export function useAuthIsValueAvailable({
+  value,
+  enabled,
+  valueToValidate,
+}: Params) {
+  const valueDebounced = useDebounce(value, 1500);
 
   const {data, isFetching} = useQuery({
-    queryKey: [QueryKeys.IsUserNameAvailable, usenameDebounced],
-    queryFn: () => authServices.isUserNameAvailable(usenameDebounced),
+    queryKey: [keys[valueToValidate], valueDebounced],
+    queryFn: () => functionsToRequest[valueToValidate](valueDebounced),
     retry: false,
     staleTime: 20000,
-    enabled: enabled && usenameDebounced.length > 0,
+    enabled: enabled && valueDebounced.length > 0,
   });
 
-  const isDebouncing = usenameDebounced !== username;
+  const isDebouncing = valueDebounced !== value;
 
   return {
     isUnavailable: data === false,

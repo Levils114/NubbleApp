@@ -2,7 +2,8 @@
 import React from 'react';
 
 import {zodResolver} from '@hookform/resolvers/zod';
-import {useAuthSignUp, useAuthIsValueAvailable} from '@modules';
+import {useValueIsAvailable} from '@infra';
+import {useAuthSignUp} from '@modules';
 import {useForm} from 'react-hook-form';
 
 import {
@@ -45,12 +46,15 @@ export function SignUpScreen() {
       resolver: zodResolver(signUpFormSchema),
     });
 
-  const username = watch('username');
-  const usernameState = getFieldState('username');
-  const usernameIsValid = !usernameState.invalid && usernameState.isDirty;
-  const usernameQuery = useAuthIsValueAvailable({
-    username,
-    enabled: usernameIsValid,
+  const usernameQuery = useValueIsAvailable({
+    getFieldState,
+    watch,
+    valueToInvestigate: 'username',
+  });
+  const emailValidateQuery = useValueIsAvailable({
+    getFieldState,
+    watch,
+    valueToInvestigate: 'email',
   });
 
   function onSubmit(data: SignUpFormSchema) {
@@ -103,6 +107,14 @@ export function SignUpScreen() {
         label="E-mail"
         placeholder="Digite seu e-mail"
         boxProps={{mb: 's20'}}
+        errorMessage={
+          emailValidateQuery.isUnavailable ? 'Email indisponível' : undefined
+        }
+        rightComponent={
+          emailValidateQuery.isLoading
+            ? () => <ActivityIndicator size={'small'} />
+            : undefined
+        }
       />
 
       <FormPasswordInput
@@ -118,7 +130,9 @@ export function SignUpScreen() {
         disabled={
           !formState.isValid ||
           usernameQuery.isLoading ||
-          usernameQuery.isUnavailable
+          usernameQuery.isUnavailable ||
+          emailValidateQuery.isLoading ||
+          emailValidateQuery.isUnavailable
         }
       />
     </ScreenWrapper>
