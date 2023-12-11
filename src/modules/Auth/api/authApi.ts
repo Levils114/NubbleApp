@@ -6,11 +6,13 @@ import {IAuthLogoutResponse} from '../types/IAuthLogoutResponse';
 import {IAuthSignUpForm} from '../types/IAuthSignUp';
 import {IFieldIsAvailableApi} from '../types/IFieldIsAvailableApi';
 
+const PREFIX_ENDPOINT = '/auth';
+
 export async function authLogin(
   email: string,
   password: string,
 ): Promise<IAuthApi> {
-  const {data} = await api.post<IAuthApi>('/login', {
+  const {data} = await api.post<IAuthApi>(`${PREFIX_ENDPOINT}/login`, {
     email,
     password,
   });
@@ -19,7 +21,9 @@ export async function authLogin(
 }
 
 export async function authLogout(): Promise<IAuthLogoutResponse> {
-  const {data} = await api.get<IAuthLogoutResponse>('/profile/logout');
+  const {data} = await api.get<IAuthLogoutResponse>(
+    `${PREFIX_ENDPOINT}/profile/logout`,
+  );
 
   return data;
 }
@@ -27,7 +31,10 @@ export async function authLogout(): Promise<IAuthLogoutResponse> {
 export async function authSignUp(
   authSignUpProps: IAuthSignUpForm,
 ): Promise<UserApi> {
-  const {data} = await api.post<UserApi>('/register', authSignUpProps);
+  const {data} = await api.post<UserApi>(
+    `${PREFIX_ENDPOINT}/register`,
+    authSignUpProps,
+  );
 
   return data;
 }
@@ -35,9 +42,12 @@ export async function authSignUp(
 async function isUserNameAvailable(params: {
   username: string;
 }): Promise<IFieldIsAvailableApi> {
-  const response = await api.get<IFieldIsAvailableApi>('/validate-username', {
-    params,
-  });
+  const response = await api.get<IFieldIsAvailableApi>(
+    `${PREFIX_ENDPOINT}/validate-username`,
+    {
+      params,
+    },
+  );
 
   return response.data;
 }
@@ -45,16 +55,19 @@ async function isUserNameAvailable(params: {
 async function isEmailAvailable(params: {
   email: string;
 }): Promise<IFieldIsAvailableApi> {
-  const response = await api.get<IFieldIsAvailableApi>('/validate-email', {
-    params,
-  });
+  const response = await api.get<IFieldIsAvailableApi>(
+    `${PREFIX_ENDPOINT}/validate-email`,
+    {
+      params,
+    },
+  );
 
   return response.data;
 }
 
 async function forgotPassword(email: string): Promise<string> {
   const {data} = await api.post<{message: string}>(
-    '/forgot-password',
+    `${PREFIX_ENDPOINT}/forgot-password`,
     undefined,
     {
       params: {email},
