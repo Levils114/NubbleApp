@@ -1,5 +1,7 @@
 export interface IAuthCredentials {
   token: string;
+  tokenExpiresAt: string;
+  refreshToken: string;
   user: {
     id: number; // 1;
     firstName: string; //'Maria';

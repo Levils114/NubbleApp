@@ -4,6 +4,7 @@ import {UserDto, UserType} from '@modules';
 import {authApi} from '../api/authApi';
 import {authAdapter} from '../dtos/authAdapter';
 import {IAuthCredentials} from '../types/IAuthCredentials';
+import {IAuthRefreshTokenBody} from '../types/IAuthRefreshTokenBody';
 import {IAuthSignUpForm} from '../types/IAuthSignUp';
 
 export async function authLogin(
@@ -70,6 +71,19 @@ async function forgotPassword(email: string): Promise<string> {
   }
 }
 
+async function refreshToken(
+  body: IAuthRefreshTokenBody,
+): Promise<IAuthCredentials> {
+  try {
+    const apiResponse = await authApi.refreshToken(body);
+    const authCredential = authAdapter.toAuthCredential(apiResponse);
+
+    return authCredential;
+  } catch (error) {
+    throw new Error('Erro ao tentar reativar token');
+  }
+}
+
 export const authServices = {
   authLogin,
   authLogout,
@@ -79,4 +93,6 @@ export const authServices = {
   updateToken,
   removeToken,
   forgotPassword,
+  refreshToken,
+  isRefreshTokenRequest: authApi.isRefreshTokenRequest,
 };

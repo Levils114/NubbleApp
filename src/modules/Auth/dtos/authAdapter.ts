@@ -4,6 +4,8 @@ import {IAuthCredentials} from '../types/IAuthCredentials';
 export function toAuthCredential(authApi: IAuthApi): IAuthCredentials {
   return {
     token: authApi.auth.token,
+    refreshToken: authApi.auth.refreshToken,
+    tokenExpiresAt: authApi.auth.expires_at,
     user: {
       ...authApi.user,
       firstName: authApi.user.first_name,

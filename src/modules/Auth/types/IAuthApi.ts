@@ -2,6 +2,8 @@ export interface IAuthApi {
   auth: {
     type: string;
     token: string;
+    refreshToken: string;
+    expires_at: string;
   };
   user: {
     id: number; // 1;

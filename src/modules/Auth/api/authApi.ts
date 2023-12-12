@@ -1,8 +1,10 @@
 import {api} from '@api/';
 import {UserApi} from '@modules';
+import {AxiosRequestConfig} from 'axios';
 
 import {IAuthApi} from '../types/IAuthApi';
 import {IAuthLogoutResponse} from '../types/IAuthLogoutResponse';
+import {IAuthRefreshTokenBody} from '../types/IAuthRefreshTokenBody';
 import {IAuthSignUpForm} from '../types/IAuthSignUp';
 import {IFieldIsAvailableApi} from '../types/IFieldIsAvailableApi';
 
@@ -77,6 +79,19 @@ async function forgotPassword(email: string): Promise<string> {
   return data.message;
 }
 
+async function refreshToken(body: IAuthRefreshTokenBody): Promise<IAuthApi> {
+  const {data} = await api.post<IAuthApi>(
+    `${PREFIX_ENDPOINT}/refresh-token`,
+    body,
+  );
+
+  return data;
+}
+
+function isRefreshTokenRequest(request: AxiosRequestConfig): boolean {
+  return request.url!.includes(`${PREFIX_ENDPOINT}/refresh-token`);
+}
+
 export const authApi = {
   authLogin,
   authLogout,
@@ -84,4 +99,6 @@ export const authApi = {
   isUserNameAvailable,
   isEmailAvailable,
   forgotPassword,
+  refreshToken,
+  isRefreshTokenRequest,
 };
