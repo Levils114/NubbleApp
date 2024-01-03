@@ -18,6 +18,7 @@ module.exports = {
           '@modules': './src/modules',
           '@routes': './src/routes',
           '@screens': './src/screens',
+          '@test': './src/test',
         },
       },
     ],
