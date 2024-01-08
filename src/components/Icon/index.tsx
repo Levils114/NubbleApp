@@ -41,7 +41,7 @@ export function Icon({
 
   if (onPress) {
     return (
-      <Pressable onPress={onPress} hitSlop={12}>
+      <Pressable testID={name} onPress={onPress} hitSlop={12}>
         <SVGIcon
           color={svgColor}
           width={svgWidth}
