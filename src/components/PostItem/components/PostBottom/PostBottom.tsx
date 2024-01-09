@@ -2,14 +2,22 @@ import React from 'react';
 import {Pressable} from 'react-native';
 
 import {Post} from '@modules';
+import {useNavigation} from '@react-navigation/native';
 
 import {Box, Text} from '@components';
 
 export function PostBottom({
+  id,
   author,
   text,
   commentCount,
-}: Pick<Post, 'author' | 'text' | 'commentCount'>) {
+}: Pick<Post, 'id' | 'author' | 'text' | 'commentCount'>) {
+  const {navigate} = useNavigation();
+
+  function handleGoToPostComment() {
+    navigate('PostCommentScreen', {postId: id});
+  }
+
   return (
     <Box paddingHorizontal="s24">
       <Text bold>{author.userName}</Text>
@@ -18,7 +26,7 @@ export function PostBottom({
       </Text>
 
       {commentCount > 0 && (
-        <Pressable>
+        <Pressable onPress={handleGoToPostComment}>
           <Text
             color="primary"
             bold

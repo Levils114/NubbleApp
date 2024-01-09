@@ -1,11 +1,16 @@
 import React from 'react';
 
 import {lightTheme} from '@global/theme/lightTheme';
+import {NavigationContainer} from '@react-navigation/native';
 import {ThemeProvider} from '@shopify/restyle';
 import {render, RenderOptions} from '@testing-library/react-native';
 
 function AllProvidersWrapper({children}: {children: React.ReactNode}) {
-  return <ThemeProvider theme={lightTheme}>{children}</ThemeProvider>;
+  return (
+    <NavigationContainer>
+      <ThemeProvider theme={lightTheme}>{children}</ThemeProvider>
+    </NavigationContainer>
+  );
 }
 
 function customRender<T>(
