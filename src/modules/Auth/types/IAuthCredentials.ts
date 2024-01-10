@@ -8,12 +8,12 @@ export interface IAuthCredentials {
     lastName: string; //'Julia';
     username: string; //'mariajulia';
     email: string; //'mariajulia@coffstack.com';
-    tempToken: null;
-    rememberMeToken: null;
+    tempToken?: null;
+    rememberMeToken?: null;
     profileUrl: string; //'https://nubble-development.s3.sa-east-1.amazonaws.com/backend-integration/1-maria.png';
     isOnline: boolean; //false;
-    tempTokenCreatedAt: null;
-    rememberMeTokenCreatedAt: null;
+    tempTokenCreatedAt?: null;
+    rememberMeTokenCreatedAt?: null;
     fullName: string; //'Maria Julia';
   };
 }

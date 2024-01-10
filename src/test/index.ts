@@ -1,2 +1,2 @@
 export * from './utils/testUtils';
-export * from './mocks/mockedPost';
+export * from './mocks';

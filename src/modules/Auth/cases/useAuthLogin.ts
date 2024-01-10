@@ -14,15 +14,19 @@ export function useAuthLogin(
 ) {
   const {saveCredentials} = useAuthCredentials();
 
-  const {mutate, isLoading} = useMutation<IAuthCredentials, Error, Variables>({
+  const {mutate, isLoading, isSuccess} = useMutation<
+    IAuthCredentials,
+    Error,
+    Variables
+  >({
     mutationFn: ({email, password}) => authServices.authLogin(email, password),
     retry: false,
-    onSuccess: async ({token, user}) => {
+    onSuccess: async authCredentials => {
       if (options?.onSuccess) {
         options.onSuccess;
       }
 
-      await saveCredentials({token, user});
+      await saveCredentials(authCredentials);
     },
     onError: error => {
       if (options?.onError) {
@@ -33,6 +37,7 @@ export function useAuthLogin(
 
   return {
     isLoading,
+    isSuccess,
     authLogin: (variables: Variables) => mutate(variables),
   };
 }
