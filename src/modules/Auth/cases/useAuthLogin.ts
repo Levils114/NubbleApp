@@ -10,11 +10,11 @@ interface Variables {
 }
 
 export function useAuthLogin(
-  options?: MutationOptions<IAuthCredentials, string>,
+  options?: MutationOptions<IAuthCredentials, string, undefined>,
 ) {
   const {saveCredentials} = useAuthCredentials();
 
-  const {mutate, isLoading, isSuccess} = useMutation<
+  const {mutate, isLoading, isSuccess, isError} = useMutation<
     IAuthCredentials,
     Error,
     Variables
@@ -23,7 +23,7 @@ export function useAuthLogin(
     retry: false,
     onSuccess: async authCredentials => {
       if (options?.onSuccess) {
-        options.onSuccess;
+        options.onSuccess(authCredentials, undefined, undefined);
       }
 
       await saveCredentials(authCredentials);
@@ -38,6 +38,7 @@ export function useAuthLogin(
   return {
     isLoading,
     isSuccess,
+    isError,
     authLogin: (variables: Variables) => mutate(variables),
   };
 }
