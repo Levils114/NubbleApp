@@ -1,12 +1,16 @@
 import React from 'react';
 
-import {renderScreen} from '@test';
+import {renderScreen, server} from '@test';
 
 import {PostCommentScreen} from '../../PostCommentScreen';
 
 describe('integration: PostCommentScreen', () => {
-  test('When ADDING a comment the list is automatically updated', () => {
-    renderScreen(
+  beforeAll(() => server.listen());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
+
+  test('When ADDING a comment the list is automatically updated', async () => {
+    const screen = renderScreen(
       <PostCommentScreen
         navigation={{} as any}
         route={{
@@ -18,5 +22,9 @@ describe('integration: PostCommentScreen', () => {
         }}
       />,
     );
+
+    const comment = await screen.findByText(/comentário aleatório/i);
+
+    expect(comment).toBeTruthy();
   });
 });

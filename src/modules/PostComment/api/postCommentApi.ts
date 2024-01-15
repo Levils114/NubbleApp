@@ -1,15 +1,15 @@
-import {PageApi, PageParams} from '@api/';
-import {api} from '@api/';
+import {PageApi, PageParams} from '@api';
+import {api} from '@api';
 
 import {CreateCommentParams, PostCommentApi} from '..';
 
-const ENDPOINT = '/user/post_comment';
+export const POST_COMMENT_ENDPOINT = '/user/post_comment';
 
 async function getCommentPostList(
   post_id: number,
   pageParams?: PageParams,
 ): Promise<PageApi<PostCommentApi>> {
-  const {data} = await api.get<PageApi<PostCommentApi>>(ENDPOINT, {
+  const {data} = await api.get<PageApi<PostCommentApi>>(POST_COMMENT_ENDPOINT, {
     params: {
       post_id,
       ...pageParams,
@@ -23,7 +23,7 @@ async function createComment({
   post_id,
   message,
 }: CreateCommentParams): Promise<PostCommentApi> {
-  const {data} = await api.post<PostCommentApi>(ENDPOINT, {
+  const {data} = await api.post<PostCommentApi>(POST_COMMENT_ENDPOINT, {
     post_id,
     message,
   });
@@ -32,7 +32,7 @@ async function createComment({
 }
 
 async function deleteComment(comment_id: number) {
-  await api.delete(`${ENDPOINT}/${comment_id}`);
+  await api.delete(`${POST_COMMENT_ENDPOINT}/${comment_id}`);
 }
 
 export const postCommentApi = {

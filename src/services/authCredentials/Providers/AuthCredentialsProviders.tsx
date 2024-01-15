@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {registerInterceptor} from '@api/';
+import {registerInterceptor} from '@api';
 import {authServices, IAuthCredentials} from '@modules';
 
 import {IAuthCredentialsService} from '..';

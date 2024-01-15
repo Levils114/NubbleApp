@@ -9,15 +9,6 @@ jest.mock('@services', () => ({
     saveCredentials: mockedSaveCredentials,
   }),
 }));
-jest.mock('@infra', () => ({
-  QueryKeys: {
-    PostList: 'PostList',
-    PostCommentList: 'PostCommentList',
-    UserGetInfo: 'UserGetInfo',
-    IsUserNameAvailable: 'IsUserNameAvailable',
-    IsEmailAvailable: 'IsEmailAvailable',
-  },
-}));
 
 describe('useAuthLogin', () => {
   it('should saves credentials when login works', async () => {

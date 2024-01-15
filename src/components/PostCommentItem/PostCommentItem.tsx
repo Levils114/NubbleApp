@@ -3,6 +3,7 @@ import {Alert, Pressable} from 'react-native';
 
 import {PostComment, usePostCommentDelete} from '@modules';
 import {useToastService} from '@services';
+import {useAuthCredentialsContextVersion} from '@services';
 
 import {Box, Text, UserAvatar} from '@components';
 
@@ -13,6 +14,7 @@ interface PostCommentItemProps {
 
 export function PostCommentItem({postId, postComment}: PostCommentItemProps) {
   const {showToast} = useToastService();
+  const {authCredentials} = useAuthCredentialsContextVersion();
   const {deleteComment} = usePostCommentDelete(postId, postComment, {
     onSuccess: () => {
       showToast({
@@ -23,7 +25,11 @@ export function PostCommentItem({postId, postComment}: PostCommentItemProps) {
   });
 
   function handleDeleteComment() {
-    if (postComment.author.id === 1 || postComment.postData.userId === 1) {
+    const userId = authCredentials?.user.id;
+    const postAuthor = postComment.author.id;
+    const commentAuthor = postComment.postData.userId;
+
+    if (postAuthor === userId || commentAuthor === userId) {
       Alert.alert('Tem certeza que deseja deletar o comentário?', undefined, [
         {text: 'Não', onPress: () => {}},
         {text: 'Sim', onPress: deleteComment},

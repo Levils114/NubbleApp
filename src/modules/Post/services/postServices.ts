@@ -1,4 +1,4 @@
-import {metadataDto} from '@api/';
+import {metadataDto} from '@api';
 import {Post} from '@modules';
 import {Page} from 'src/@types/Pages';
 

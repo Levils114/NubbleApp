@@ -1,4 +1,4 @@
-import {metadataDto} from '@api/';
+import {metadataDto} from '@api';
 import {Page} from 'src/@types/Pages';
 
 import {CreateCommentParams, PostComment} from '..';

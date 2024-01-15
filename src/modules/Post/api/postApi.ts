@@ -1,5 +1,5 @@
-import {PageApi, PageParams} from '@api/';
-import {api} from '@api/';
+import {PageApi, PageParams} from '@api';
+import {api} from '@api';
 
 import {PostAPI} from '../types/PostApi';
 

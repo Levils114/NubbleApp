@@ -1,4 +1,4 @@
-import {api} from '@api/';
+import {api} from '@api';
 import {UserDto, UserType} from '@modules';
 
 import {authApi} from '../api/authApi';
