@@ -31,7 +31,7 @@ async function createComment({
   return data;
 }
 
-async function deleteComment(comment_id: number) {
+async function deleteComment(comment_id: number): Promise<void> {
   await api.delete(`${POST_COMMENT_ENDPOINT}/${comment_id}`);
 }
 

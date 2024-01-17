@@ -1,12 +1,25 @@
 import React from 'react';
+import {Alert, AlertButton} from 'react-native';
 
-import {renderScreen, server} from '@test';
+import {authCredentialsStorage} from '@services';
+import {
+  renderScreen,
+  server,
+  fireEvent,
+  mateusAuthCredentials,
+  mateusPostCommentAPI,
+  waitForElementToBeRemoved,
+  resetInMemoryResponse,
+} from '@test';
 
 import {PostCommentScreen} from '../../PostCommentScreen';
 
 describe('integration: PostCommentScreen', () => {
   beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
+  afterEach(() => {
+    server.resetHandlers();
+    resetInMemoryResponse();
+  });
   afterAll(() => server.close());
 
   test('When ADDING a comment the list is automatically updated', async () => {
@@ -23,8 +36,66 @@ describe('integration: PostCommentScreen', () => {
       />,
     );
 
-    const comment = await screen.findByText(/comentário aleatório/i);
+    const inputText = screen.getByPlaceholderText(/Adicione um comentário/i);
+
+    fireEvent.changeText(inputText, 'Novo comentário');
+
+    const sendCommentButton = screen.getByText('Enviar');
+    fireEvent.press(sendCommentButton);
+
+    const newCommentary = await screen.findByText(/Novo comentário/i);
+    const comments = await screen.findAllByTestId('post-comment-item-id');
+
+    expect(newCommentary).toBeTruthy();
+    expect(comments.length).toEqual(3);
+  });
+
+  test('When DELETING a comment, the list should uptade wihout comment and toast should appear', async () => {
+    jest
+      .spyOn(authCredentialsStorage, 'get')
+      .mockResolvedValue(mateusAuthCredentials);
+
+    let mockedConfirm: AlertButton['onPress'];
+    const mockedAlert = jest
+      .spyOn(Alert, 'alert')
+      .mockImplementation((_, __, buttons) => {
+        if (buttons && buttons[1]) {
+          mockedConfirm = buttons[1].onPress;
+        }
+      });
+
+    const screen = renderScreen(
+      <PostCommentScreen
+        navigation={{} as any}
+        route={{
+          name: 'PostCommentScreen',
+          key: 'PostCommentScreen',
+          params: {
+            postId: 1,
+          },
+        }}
+      />,
+    );
+
+    const comment = await screen.findByText(mateusPostCommentAPI.message, {
+      exact: false,
+    });
 
     expect(comment).toBeTruthy();
+
+    fireEvent(comment, 'longPress');
+
+    expect(mockedAlert).toHaveBeenCalled();
+
+    mockedConfirm && mockedConfirm();
+
+    await waitForElementToBeRemoved(() =>
+      screen.getByText(mateusPostCommentAPI.message, {
+        exact: false,
+      }),
+    );
+
+    const comments = await screen.findAllByTestId('post-comment-item-id');
+    expect(comments.length).toEqual(1);
   });
 });

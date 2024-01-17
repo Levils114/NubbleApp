@@ -2,6 +2,7 @@ import React, {ReactElement} from 'react';
 
 import {lightTheme} from '@global/theme/lightTheme';
 import {NavigationContainer} from '@react-navigation/native';
+import {AuthCredentialsProvider} from '@services';
 import {ThemeProvider} from '@shopify/restyle';
 import {
   QueryClient,
@@ -58,11 +59,13 @@ export const wrapScreenProviders = () => {
   const queryClient = new QueryClient(queryClientConfig);
 
   return ({children}: {children: React.ReactNode}) => (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={lightTheme}>
-        <NavigationContainer>{children} </NavigationContainer>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <AuthCredentialsProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={lightTheme}>
+          <NavigationContainer>{children} </NavigationContainer>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </AuthCredentialsProvider>
   );
 };
 

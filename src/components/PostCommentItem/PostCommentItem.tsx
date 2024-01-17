@@ -38,7 +38,7 @@ export function PostCommentItem({postId, postComment}: PostCommentItemProps) {
   }
 
   return (
-    <Pressable onLongPress={handleDeleteComment}>
+    <Pressable testID="post-comment-item-id" onLongPress={handleDeleteComment}>
       <Box
         gap="s16"
         mb="s32"
