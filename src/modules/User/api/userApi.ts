@@ -1,4 +1,4 @@
-import {api} from '@api';
+import {api, PageApi} from '@api';
 
 import {UserApi} from '../@types/UserApi';
 
@@ -10,4 +10,14 @@ async function getUser(id: number): Promise<UserApi> {
   return data;
 }
 
-export const userApi = {getUser};
+async function getUsersList(userSearched: string): Promise<PageApi<UserApi>> {
+  const {data} = await api.get<PageApi<UserApi>>(ENDPOINT, {
+    params: {
+      search: userSearched,
+    },
+  });
+
+  return data;
+}
+
+export const userApi = {getUser, getUsersList};

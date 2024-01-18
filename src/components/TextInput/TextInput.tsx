@@ -18,16 +18,18 @@ import {
 import {useAppTheme} from '@hooks';
 
 export interface TextInputProps extends RNTextInputProps {
-  label: string;
+  label?: string;
   errorMessage?: string;
   boxProps?: BoxProps<Theme>;
-  rightComponent?: () => JSX.Element;
+  RightComponent?: () => JSX.Element;
+  LeftComponent?: React.ReactNode;
 }
 
 export function TextInput({
   label,
   errorMessage,
-  rightComponent: RightComponent,
+  RightComponent,
+  LeftComponent,
   boxProps,
   ...props
 }: TextInputProps) {
@@ -41,9 +43,9 @@ export function TextInput({
   }
 
   return (
-    <Box {...boxProps}>
+    <Box flexGrow={1} flexShrink={1} {...boxProps}>
       <Pressable onPress={handleTextInputFocus}>
-        <Text mb="s4">{label}</Text>
+        {label && <Text mb="s4">{label}</Text>}
 
         <Box
           borderWidth={hasError ? 2 : 1}
@@ -54,6 +56,9 @@ export function TextInput({
           flexDirection="row"
           alignItems="center"
           justifyContent="space-between">
+          {LeftComponent && (
+            <TouchableOpacityBox mr="s16">{LeftComponent}</TouchableOpacityBox>
+          )}
           <RNTextInput
             ref={textInputRef}
             placeholderTextColor={colors.gray2}

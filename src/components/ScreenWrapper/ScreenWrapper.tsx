@@ -12,6 +12,7 @@ import {getContainer} from './components/ScreenContainer';
 import {ScreenWrapperHeader} from './components/ScreenWrapperHeader';
 
 export interface ScreenWrapper extends BoxProps<Theme>, ViewProps {
+  HeaderComponent?: React.ReactNode;
   canGoBack?: boolean;
   isScrollable?: boolean;
   title?: string;
@@ -19,6 +20,7 @@ export interface ScreenWrapper extends BoxProps<Theme>, ViewProps {
 
 export function ScreenWrapper({
   children,
+  HeaderComponent,
   canGoBack,
   isScrollable = false,
   title,
@@ -43,7 +45,11 @@ export function ScreenWrapper({
             },
             props.style,
           ]}>
-          <ScreenWrapperHeader canGoBack={canGoBack} title={title} />
+          <ScreenWrapperHeader
+            canGoBack={canGoBack}
+            title={title}
+            HeaderComponent={HeaderComponent}
+          />
           {children}
         </Box>
       </Container>

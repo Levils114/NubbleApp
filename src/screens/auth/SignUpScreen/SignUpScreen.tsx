@@ -76,7 +76,7 @@ export function SignUpScreen() {
         }
         placeholder="@"
         boxProps={{mb: 's20'}}
-        rightComponent={
+        RightComponent={
           usernameQuery.isLoading
             ? () => <ActivityIndicator size={'small'} />
             : undefined
@@ -110,7 +110,7 @@ export function SignUpScreen() {
         errorMessage={
           emailValidateQuery.isUnavailable ? 'Email indisponível' : undefined
         }
-        rightComponent={
+        RightComponent={
           emailValidateQuery.isLoading
             ? () => <ActivityIndicator size={'small'} />
             : undefined

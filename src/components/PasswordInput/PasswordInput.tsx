@@ -13,7 +13,7 @@ export function PasswordInput(props: TextInputProps) {
   return (
     <TextInput
       secureTextEntry={isPasswordSecurity}
-      rightComponent={() => (
+      RightComponent={() => (
         <Icon
           name={isPasswordSecurity ? 'eyeOn' : 'eyeOff'}
           color="gray2"

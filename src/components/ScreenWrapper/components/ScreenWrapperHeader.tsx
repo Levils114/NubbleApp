@@ -6,15 +6,21 @@ import {Box, Icon, Text, TouchableOpacityBox} from '@components';
 
 import {ScreenWrapper} from '../ScreenWrapper';
 
-type ScreenWrapperHeaderProps = Pick<ScreenWrapper, 'title' | 'canGoBack'>;
+type ScreenWrapperHeaderProps = Pick<
+  ScreenWrapper,
+  'title' | 'canGoBack' | 'HeaderComponent'
+>;
 
 const ICON_SIZE = 20;
 
 export function ScreenWrapperHeader({
+  HeaderComponent,
   canGoBack,
   title,
 }: ScreenWrapperHeaderProps) {
   const {goBack} = useNavigation();
+
+  const showBackLabel = !title && !HeaderComponent;
 
   return (
     <Box
@@ -26,15 +32,17 @@ export function ScreenWrapperHeader({
         <TouchableOpacityBox
           flexDirection="row"
           alignItems="center"
+          marginRight="s10"
           onPress={goBack}>
           <Icon width="s20" height="s20" name="arrowLeft" color="primary" />
-          {!title && (
+          {showBackLabel && (
             <Text ml="s8" semibold>
               Voltar
             </Text>
           )}
         </TouchableOpacityBox>
       )}
+      {HeaderComponent}
       {title && (
         <Text black preset="headingSmall">
           {title}
