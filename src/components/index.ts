@@ -28,3 +28,5 @@ export * from './TextInput/TextInput';
 export * from './TextMessage/TextMessage';
 
 export * from './UserAvatar/UserAvatar';
+
+export * from './ProfileUser/ProfileUser';

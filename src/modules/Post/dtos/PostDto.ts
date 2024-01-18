@@ -10,9 +10,9 @@ export function postDto(postApi: PostAPI): Post {
     reactionCount: Number(postApi.meta.like_count),
     author: {
       id: postApi.user.id,
-      name: postApi.user.full_name,
-      userName: postApi.user.username,
-      profileURL: postApi.user.profile_url,
+      fullName: postApi.user.full_name,
+      username: postApi.user.username,
+      profileUrl: postApi.user.profile_url,
     },
   };
 }

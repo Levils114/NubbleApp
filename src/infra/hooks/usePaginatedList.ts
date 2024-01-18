@@ -11,9 +11,16 @@ export interface UsePaginatedListResult<TData> {
   refresh: () => void;
   fetchNextPage: () => void;
 }
+
+interface PaginatedListOptions {
+  enabled?: boolean;
+  staleTime?: number;
+}
+
 export function usePaginatedList<Data>(
   queryKey: QueryKey,
   getList: (page: number) => Promise<Page<Data>>,
+  paginatedOptions?: PaginatedListOptions,
 ): UsePaginatedListResult<Data> {
   const [list, setList] = useState<Data[]>([]);
 
@@ -22,6 +29,7 @@ export function usePaginatedList<Data>(
     queryFn: ({pageParam = 1}) => getList(pageParam),
     getNextPageParam: ({meta}: Page<Data>) =>
       meta?.hasNextPage ? meta?.currentPage + 1 : undefined,
+    ...paginatedOptions,
   });
 
   useEffect(() => {
