@@ -21,7 +21,6 @@ export function ScreenWrapperHeader({
   const {goBack} = useNavigation();
 
   const showBackLabel = !title && !HeaderComponent;
-
   return (
     <Box
       mb="s24"
