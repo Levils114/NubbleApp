@@ -1,33 +1,53 @@
 import React from 'react';
-import {Pressable} from 'react-native';
 
-import {Theme} from '@global/theme/lightTheme';
 import {UserType} from '@modules';
 import {useNavigation} from '@react-navigation/native';
-import {BoxProps} from '@shopify/restyle';
+import {GestureResponderEvent} from 'react-native/types';
 
-import {Box, Text, UserAvatar} from '@components';
+import {Text, UserAvatar} from '@components';
 
-interface ProfileUser extends BoxProps<Theme> {
+import {Box, PressableBox, PressableBoxProps} from '../Box';
+import {UserAvatarProps} from '../UserAvatar/UserAvatar';
+
+interface ProfileUser extends PressableBoxProps {
   user: Pick<UserType, 'id' | 'profileUrl' | 'username'>;
+  userAvatarProps?: UserAvatarProps;
+  RightComponent?: React.ReactElement;
 }
 
-export function ProfileUser({user, ...boxProps}: ProfileUser) {
+export function ProfileUser({
+  user,
+  onPress,
+  userAvatarProps,
+  RightComponent,
+  ...pressabledBoxProps
+}: ProfileUser) {
   const {navigate} = useNavigation();
 
-  function navigateToUsersProfileScreen() {
+  function handleOnPress(event: GestureResponderEvent) {
+    if (onPress) {
+      onPress(event);
+    }
+
     navigate('UsersProfileScreen', {userId: user.id});
   }
 
   return (
-    <Pressable onPress={navigateToUsersProfileScreen}>
-      <Box flexDirection="row" alignItems="center" {...boxProps}>
-        <UserAvatar userAvatar={user.profileUrl} />
+    <PressableBox
+      onPress={handleOnPress}
+      flexDirection="row"
+      alignItems="center"
+      justifyContent="space-between"
+      {...pressabledBoxProps}>
+      <Box flexDirection="row" alignItems="center">
+        <UserAvatar {...userAvatarProps} userAvatar={user.profileUrl} />
 
         <Text ml="s12" semibold>
           {user.username}
         </Text>
       </Box>
-    </Pressable>
+
+      {RightComponent}
+    </PressableBox>
   );
 }

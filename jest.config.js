@@ -8,6 +8,6 @@ module.exports = {
   coveragePathIgnorePatterns: ['/node_modules/'],
   setupFiles: ['<rootDir>/src/test/setup/jestSetup.ts'],
   transformIgnorePatterns: [
-    'node_modules/(?!((jest-)?react-native|@react-native(-community)?|react-native-safe-area-context)/)',
+    'node_modules/(?!((jest-)?react-native|@react-native(-community)?|react-native-safe-area-context|@react-navigation)/)',
   ],
 };

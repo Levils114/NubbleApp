@@ -24,11 +24,16 @@ export type StackAppRoutes = {
   SearchScreen: undefined;
 };
 
+interface IAppRoutes {
+  initialRouteName?: keyof StackAppRoutes;
+}
+
 const Stack = createNativeStackNavigator<StackAppRoutes>();
 
-export function AppRoutes() {
+export function AppRoutes({initialRouteName}: IAppRoutes) {
   return (
     <Stack.Navigator
+      initialRouteName={initialRouteName}
       screenOptions={{
         headerShown: false,
         fullScreenGestureEnabled: true,

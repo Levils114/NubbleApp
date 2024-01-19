@@ -6,12 +6,12 @@ import {
   renderScreen,
   server,
   fireEvent,
-  mateusAuthCredentials,
   mateusPostCommentAPI,
   waitForElementToBeRemoved,
   resetInMemoryResponse,
   waitFor,
   act,
+  mockedUserAuthenticated,
 } from '@test';
 
 import {PostCommentScreen} from '../../PostCommentScreen';
@@ -61,7 +61,7 @@ describe('integration: PostCommentScreen', () => {
   test('When DELETING a comment, the list should uptade wihout comment and toast should appear', async () => {
     jest
       .spyOn(authCredentialsStorage, 'get')
-      .mockResolvedValue(mateusAuthCredentials);
+      .mockResolvedValue(mockedUserAuthenticated);
 
     let mockedConfirm: AlertButton['onPress'];
     const mockedAlert = jest

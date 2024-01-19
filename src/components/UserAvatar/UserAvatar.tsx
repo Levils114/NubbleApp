@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, ImageProps} from 'react-native';
 
-interface UserAvatarProps extends Omit<ImageProps, 'source'> {
+export interface UserAvatarProps extends Omit<ImageProps, 'source'> {
   userAvatar?: string;
 }
 

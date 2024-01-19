@@ -14,7 +14,6 @@ async function getUser(id: number): Promise<UserType> {
 }
 
 async function getUsersList(userSearched: string): Promise<Page<UserType>> {
-  console.log({userSearched});
   const {meta, data} = await userApi.getUsersList(userSearched);
 
   const usersFormatted = data.map(user => UserDto(user));
