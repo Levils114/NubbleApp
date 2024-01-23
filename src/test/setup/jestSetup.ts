@@ -1,7 +1,11 @@
 export {};
 
-//@ts-ignore
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
+
+import {initializeStorage} from './../../services';
+import {inMemoryStorage} from './../../services/Storage/implementation/jest/inMemoryStorage';
+
+//@ts-ignore
 
 jest.mock('@infra', () => {
   const requireActual = jest.requireActual('@infra');
@@ -33,3 +37,5 @@ jest.mock('@react-navigation/native', () => {
     useRoute: () => ({}),
   };
 });
+
+initializeStorage(inMemoryStorage);

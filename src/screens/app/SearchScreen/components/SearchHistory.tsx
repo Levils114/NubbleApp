@@ -17,7 +17,11 @@ export function SearchHistory() {
         mb="s16"
         userAvatarProps={{width: 48, height: 48}}
         RightComponent={
-          <Icon name="trash" onPress={() => deleteUser(item.id)} />
+          <Icon
+            name="trash"
+            onPress={() => deleteUser(item.id)}
+            testID="trash-button"
+          />
         }
       />
     );
