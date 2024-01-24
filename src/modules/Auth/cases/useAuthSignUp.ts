@@ -16,7 +16,7 @@ export function useAuthSignUp(options?: UseMutationOptions<IAuthSignUpForm>) {
     },
     onError: error => {
       if (options?.onError) {
-        options.onError(error?.message);
+        options.onError(error);
       }
     },
   });

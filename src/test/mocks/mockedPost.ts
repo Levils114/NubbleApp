@@ -9,8 +9,8 @@ export const mockedPost: Post = {
   text: 'this is the text (post description)',
   author: {
     id: 2,
-    name: 'Maria Julia',
-    profileURL: 'https://example.com',
-    userName: 'mariajulia',
+    fullName: 'Maria Julia',
+    profileUrl: 'https://example.com',
+    username: 'mariajulia',
   },
 };

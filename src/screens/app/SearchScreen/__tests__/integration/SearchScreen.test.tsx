@@ -51,7 +51,8 @@ describe('<SearchScreen />', () => {
     const comebackButton = screen.getByText(/voltar/i);
     fireEvent.press(comebackButton);
 
-    fireEvent.changeText(inputText, '');
+    const inputTextComeback = screen.getByPlaceholderText(/Digite sua busca/i);
+    fireEvent.changeText(inputTextComeback, '');
     act(() => jest.runAllTimers());
 
     const user1History = screen.getByText(userMocked.user1.username);
@@ -60,9 +61,9 @@ describe('<SearchScreen />', () => {
     const trashButton = screen.getByTestId('trash-button');
     fireEvent.press(trashButton);
 
-    const user1DeleteFromHistory = screen.queryByText(
+    const user1DeletedFromHistory = screen.queryByText(
       userMocked.user1.username,
     );
-    expect(user1DeleteFromHistory).toBeFalsy();
+    expect(user1DeletedFromHistory).toBeFalsy();
   });
 });

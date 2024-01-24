@@ -12,7 +12,7 @@ export function PostBottom({
 }: Pick<Post, 'author' | 'text' | 'commentCount'>) {
   return (
     <Box paddingHorizontal="s24">
-      <Text bold>{author.userName}</Text>
+      <Text bold>{author.username}</Text>
       <Text mb="s8" color="gray1">
         {text}
       </Text>

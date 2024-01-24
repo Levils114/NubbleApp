@@ -45,11 +45,13 @@ export function ScreenWrapper({
             },
             props.style,
           ]}>
-          <ScreenWrapperHeader
-            canGoBack={canGoBack}
-            title={title}
-            HeaderComponent={HeaderComponent}
-          />
+          {HeaderComponent && (
+            <ScreenWrapperHeader
+              canGoBack={canGoBack}
+              title={title}
+              HeaderComponent={HeaderComponent}
+            />
+          )}
           {children}
         </Box>
       </Container>

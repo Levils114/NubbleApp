@@ -20,7 +20,7 @@ export function PostBottom({
 
   return (
     <Box paddingHorizontal="s24">
-      <Text bold>{author.userName}</Text>
+      <Text bold>{author.username}</Text>
       <Text mb="s8" color="gray1">
         {text}
       </Text>

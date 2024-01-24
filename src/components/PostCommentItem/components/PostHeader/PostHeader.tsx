@@ -12,10 +12,10 @@ export function PostHeader({author}: Pick<Post, 'author'>) {
         width={32}
         height={32}
         borderRadius={14}
-        source={{uri: author.profileURL}}
+        source={{uri: author.profileUrl}}
       />
       <Text ml="s12" semibold>
-        {author.userName}
+        {author.username}
       </Text>
     </Box>
   );

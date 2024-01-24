@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {render, fireEvent, mockedPost} from '@test';
+import {fireEvent, render, screen, mockedPost} from '@test';
 
 import {PostBottom} from '../PostBottom';
 
@@ -8,7 +8,6 @@ const mockedNavigate = jest.fn();
 
 jest.mock('@react-navigation/native', () => {
   const originalModule = jest.requireActual('@react-navigation/native');
-
   return {
     ...originalModule,
     useNavigation: () => ({
@@ -16,24 +15,24 @@ jest.mock('@react-navigation/native', () => {
     }),
   };
 });
+
 describe('<PostBottom />', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  it('should not show commentary link when post has not comments', () => {
-    // Given
-    const component = render(<PostBottom {...mockedPost} commentCount={0} />);
-    const commentLinkElement = component.queryByText(/comentários/);
+  it('does not show the comment link if it has no comment', () => {
+    render(<PostBottom {...mockedPost} commentCount={0} />);
+
+    const commentLinkElement = screen.queryByText(/comentário/);
 
     expect(commentLinkElement).toBeFalsy();
   });
 
-  it('should called correctly navigate when commentary link is pressed', () => {
-    // Given
-    const component = render(<PostBottom {...mockedPost} />);
-    const commentLinkElement = component.getByText(/comentários/);
+  it('navigates to PostCommentScreen when pressing the comment link', () => {
+    render(<PostBottom {...mockedPost} commentCount={4} />);
 
-    // When
+    const commentLinkElement = screen.getByText(/comentário/);
+
     fireEvent.press(commentLinkElement);
 
     expect(mockedNavigate).toHaveBeenCalledWith('PostCommentScreen', {
