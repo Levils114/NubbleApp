@@ -16,6 +16,7 @@ export interface ScreenWrapper extends BoxProps<Theme>, ViewProps {
   canGoBack?: boolean;
   isScrollable?: boolean;
   title?: string;
+  noPaddingHorizontal?: boolean;
 }
 
 export function ScreenWrapper({
@@ -24,6 +25,7 @@ export function ScreenWrapper({
   canGoBack,
   isScrollable = false,
   title,
+  noPaddingHorizontal,
   ...props
 }: ScreenWrapper) {
   const {top, bottom} = useAppSafeArea();
@@ -36,7 +38,7 @@ export function ScreenWrapper({
       style={{flex: 1}}>
       <Container backgroundColor={colors.background}>
         <Box
-          paddingHorizontal="s24"
+          paddingHorizontal={noPaddingHorizontal ? 's0' : 's24'}
           {...props}
           style={[
             {
@@ -45,13 +47,12 @@ export function ScreenWrapper({
             },
             props.style,
           ]}>
-          {HeaderComponent && (
-            <ScreenWrapperHeader
-              canGoBack={canGoBack}
-              title={title}
-              HeaderComponent={HeaderComponent}
-            />
-          )}
+          <ScreenWrapperHeader
+            canGoBack={canGoBack}
+            title={title}
+            HeaderComponent={HeaderComponent}
+            paddingHorizontal="s24"
+          />
           {children}
         </Box>
       </Container>

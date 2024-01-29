@@ -1,6 +1,8 @@
 import React from 'react';
 
+import {Theme} from '@global/theme/lightTheme';
 import {useNavigation} from '@react-navigation/native';
+import {BoxProps} from '@shopify/restyle';
 
 import {Box, Icon, Text, TouchableOpacityBox} from '@components';
 
@@ -9,7 +11,8 @@ import {ScreenWrapper} from '../ScreenWrapper';
 type ScreenWrapperHeaderProps = Pick<
   ScreenWrapper,
   'title' | 'canGoBack' | 'HeaderComponent'
->;
+> &
+  BoxProps<Theme>;
 
 const ICON_SIZE = 20;
 
@@ -17,6 +20,7 @@ export function ScreenWrapperHeader({
   HeaderComponent,
   canGoBack,
   title,
+  ...boxProps
 }: ScreenWrapperHeaderProps) {
   const {goBack} = useNavigation();
 
@@ -26,7 +30,8 @@ export function ScreenWrapperHeader({
       mb="s24"
       flexDirection="row"
       alignItems="center"
-      justifyContent="space-between">
+      justifyContent="space-between"
+      {...boxProps}>
       {canGoBack && (
         <TouchableOpacityBox
           flexDirection="row"

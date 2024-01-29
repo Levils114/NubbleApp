@@ -7,3 +7,5 @@ export * from './authCredentials';
 export * from './searchHistory';
 
 export * from './Storage';
+
+export * from './cameraRoll';
