@@ -13,3 +13,4 @@ export * from './app/ProfileScreen/ProfileScreen';
 export * from './app/SettingsScreen/SettingsScreen';
 export * from './app/UsersProfileScreen/UsersProfileScreen';
 export * from './app/SearchScreen/SearchScreen';
+export * from './app/PublishPostScreen/PublishPostScreen';

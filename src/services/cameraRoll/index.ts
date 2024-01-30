@@ -1,1 +1,1 @@
-export * from './userCameraRoll';
+export * from './useCameraRoll';

@@ -23,6 +23,7 @@ export interface TextInputProps extends RNTextInputProps {
   boxProps?: BoxProps<Theme>;
   RightComponent?: () => JSX.Element;
   LeftComponent?: React.ReactNode;
+  containerProps?: BoxProps<Theme>;
 }
 
 export function TextInput({
@@ -31,6 +32,7 @@ export function TextInput({
   RightComponent,
   LeftComponent,
   boxProps,
+  containerProps,
   ...props
 }: TextInputProps) {
   const textInputRef = React.useRef<RNTextInput>(null);
@@ -55,7 +57,8 @@ export function TextInput({
           mb="s4"
           flexDirection="row"
           alignItems="center"
-          justifyContent="space-between">
+          justifyContent="space-between"
+          {...containerProps}>
           {LeftComponent && (
             <TouchableOpacityBox mr="s16">{LeftComponent}</TouchableOpacityBox>
           )}

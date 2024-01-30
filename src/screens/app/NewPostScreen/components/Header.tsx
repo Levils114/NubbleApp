@@ -5,11 +5,12 @@ import {ImageBackground} from 'react-native';
 import {Box, Button, Icon, Text} from '@components';
 
 interface Props {
-  imageUri: string;
+  imageUri?: string;
   imageSize: number;
+  onPress(): void;
 }
 
-export function Header({imageSize, imageUri}: Props) {
+export function Header({imageSize, imageUri, onPress}: Props) {
   return (
     <Box>
       <ImageBackground
@@ -20,7 +21,14 @@ export function Header({imageSize, imageUri}: Props) {
           justifyContent: 'flex-end',
           alignItems: 'center',
         }}>
-        <Button text="Escolher essa" mb="s24" preset="ghost" />
+        {imageUri && (
+          <Button
+            text="Escolher essa"
+            mb="s24"
+            preset="ghost"
+            onPress={onPress}
+          />
+        )}
       </ImageBackground>
       <Box
         flexDirection="row"

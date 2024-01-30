@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
@@ -33,6 +34,9 @@ export function SearchScreen({}: AppNativeStackScreenParams<'SearchScreen'>) {
   return (
     <ScreenWrapper
       canGoBack
+      headerStyles={{
+        paddingHorizontal: 's0',
+      }}
       HeaderComponent={
         <TextInput
           placeholder="Digite sua busca"
