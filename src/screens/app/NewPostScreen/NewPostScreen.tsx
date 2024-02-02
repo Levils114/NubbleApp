@@ -2,10 +2,10 @@
 import React from 'react';
 import {FlatList, ListRenderItemInfo, Image, Dimensions} from 'react-native';
 
-import {useCameraRoll} from '@services';
+import {useCameraRoll, usePermission} from '@services';
 import {AppTabNavigatorScreenParams} from '@types';
 
-import {PressableBox, ScreenWrapper} from '@components';
+import {PermissionManager, PressableBox, ScreenWrapper} from '@components';
 
 import {Header} from './components/Header';
 
@@ -18,7 +18,11 @@ export function NewPostScreen({
 }: AppTabNavigatorScreenParams<'NewPostScreen'>) {
   const [imageSelected, setImageSelected] = React.useState<string>();
 
-  const {photosList, fetchNextPage} = useCameraRoll(true, setImageSelected);
+  const permission = usePermission('photosLibrary');
+  const {photosList, fetchNextPage} = useCameraRoll(
+    permission.status === 'granted',
+    setImageSelected,
+  );
 
   const flatListRef = React.useRef<FlatList>(null);
 
@@ -45,27 +49,31 @@ export function NewPostScreen({
   }
 
   return (
-    <ScreenWrapper
-      title="Novo post"
-      canGoBack
-      noPaddingHorizontal
-      headerStyles={{paddingHorizontal: 's24'}}>
-      <FlatList
-        ref={flatListRef}
-        numColumns={COLUMNS_NUMBER}
-        keyExtractor={item => item}
-        data={photosList}
-        renderItem={renderItem}
-        ListHeaderComponent={
-          <Header
-            imageUri={imageSelected}
-            imageSize={SCREEN_WIDTH}
-            onPress={onChooseImage}
-          />
-        }
-        onEndReachedThreshold={0.1}
-        onEndReached={fetchNextPage}
-      />
-    </ScreenWrapper>
+    <PermissionManager
+      permissionName="photosLibrary"
+      description="Permita o Nubble acessar as imagens da sua galeria">
+      <ScreenWrapper
+        title="Novo post"
+        canGoBack
+        noPaddingHorizontal
+        headerStyles={{paddingHorizontal: 's24'}}>
+        <FlatList
+          ref={flatListRef}
+          numColumns={COLUMNS_NUMBER}
+          keyExtractor={item => item}
+          data={photosList}
+          renderItem={renderItem}
+          ListHeaderComponent={
+            <Header
+              imageUri={imageSelected}
+              imageSize={SCREEN_WIDTH}
+              onPress={onChooseImage}
+            />
+          }
+          onEndReachedThreshold={0.1}
+          onEndReached={fetchNextPage}
+        />
+      </ScreenWrapper>
+    </PermissionManager>
   );
 }

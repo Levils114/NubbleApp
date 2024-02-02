@@ -12,30 +12,35 @@ export function useCameraRoll(
 ) {
   const [photosList, setPhotosList] = useState<string[]>([]);
 
-  const {data, hasNextPage, fetchNextPage} =
-    useInfiniteQuery<PhotoListPaginated>({
-      queryKey: [QueryKeys.CameraRollList],
-      queryFn: ({pageParam}) => cameraRollService.getPhotos(pageParam),
-      getNextPageParam: ({cursor}) => cursor,
-      enabled: hasPermission,
-    });
+  const query = useInfiniteQuery<PhotoListPaginated>({
+    queryKey: [QueryKeys.CameraRollList],
+    queryFn: ({pageParam}) => cameraRollService.getPhotos(pageParam),
+    getNextPageParam: ({cursor}) => cursor,
+    enabled: hasPermission,
+  });
+
+  function fetchNextPage() {
+    if (hasPermission) {
+      query.fetchNextPage();
+    }
+  }
 
   useEffect(() => {
-    if (data) {
-      const newList = data.pages.reduce<string[]>((prev, curr) => {
+    if (query.data) {
+      const newList = query.data.pages.reduce<string[]>((prev, curr) => {
         return [...prev, ...curr.photoList];
       }, []);
       setPhotosList(newList);
 
-      if (data.pages.length === 1 && onInitialLoad) {
+      if (query.data.pages.length === 1 && onInitialLoad) {
         onInitialLoad(newList[0]);
       }
     }
-  }, [data, onInitialLoad]);
+  }, [query.data, onInitialLoad]);
 
   return {
     photosList,
-    hasNextPage,
+    hasNextPage: query.hasNextPage,
     fetchNextPage: () => fetchNextPage(),
   };
 }

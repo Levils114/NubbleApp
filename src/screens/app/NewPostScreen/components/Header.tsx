@@ -2,6 +2,8 @@
 import React from 'react';
 import {ImageBackground} from 'react-native';
 
+import {images} from '@assets/index';
+
 import {Box, Button, Icon, Text} from '@components';
 
 interface Props {
@@ -14,7 +16,7 @@ export function Header({imageSize, imageUri, onPress}: Props) {
   return (
     <Box>
       <ImageBackground
-        source={{uri: imageUri}}
+        source={imageUri ? {uri: imageUri} : images.imagePlaceholder}
         style={{
           width: imageSize,
           height: imageSize,

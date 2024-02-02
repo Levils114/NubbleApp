@@ -30,3 +30,5 @@ export * from './TextMessage/TextMessage';
 export * from './UserAvatar/UserAvatar';
 
 export * from './ProfileUser/ProfileUser';
+
+export * from './PermissionManager/PermissionManager';
