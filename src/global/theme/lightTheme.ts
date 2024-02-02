@@ -11,6 +11,7 @@ const palette = {
   redErrorLight: '#FBECEC',
 
   grayBlack: '#000000',
+  grayBlack60: 'rgba(0,0,0,0.6)',
   gray1: '#636363',
   gray2: '#8E8E8E',
   gray3: '#B3B3B3',
@@ -54,6 +55,7 @@ export const lightTheme = createTheme({
     s48: 48,
     s56: 56,
     s70: 70,
+    s80: 80,
     auto: 'auto',
   },
   borderRadii: {

@@ -27,31 +27,43 @@ export function PermissionManager({
   }
 
   return (
-    <ScreenWrapper flex={1} justifyContent="center" alignItems="center">
-      <Text preset="headingSmall" textAlign="center" color="error">
-        {description}
-      </Text>
-      {isLoading && <ActivityIndicator color="primary" />}
-      {status === 'never_ask_again' && (
-        <Box>
-          {Platform.OS === 'android' && (
-            <Text
-              preset="paragraphMedium"
-              color="error"
-              bold
-              marginVertical="s16"
-              textAlign="center">
-              É necessário abrir e fechar o App novamente após alterar as
-              configurações
-            </Text>
-          )}
-          <Button
-            text="Abrir Configurações"
-            onPress={Linking.openSettings}
-            mt="s16"
-          />
-        </Box>
-      )}
+    <ScreenWrapper flex={1} canGoBack>
+      <Box justifyContent="center" alignItems="center">
+        <Text preset="headingSmall" textAlign="center" color="error">
+          {description}
+        </Text>
+        {isLoading && <ActivityIndicator color="primary" />}
+        {status === 'unavailable' && (
+          <Text
+            preset="paragraphMedium"
+            color="error"
+            bold
+            marginVertical="s16"
+            textAlign="center">
+            Recurso indiponível
+          </Text>
+        )}
+        {status === 'never_ask_again' && (
+          <Box>
+            {Platform.OS === 'android' && (
+              <Text
+                preset="paragraphMedium"
+                color="error"
+                bold
+                marginVertical="s16"
+                textAlign="center">
+                É necessário abrir e fechar o App novamente após alterar as
+                configurações
+              </Text>
+            )}
+            <Button
+              text="Abrir Configurações"
+              onPress={Linking.openSettings}
+              mt="s16"
+            />
+          </Box>
+        )}
+      </Box>
     </ScreenWrapper>
   );
 }

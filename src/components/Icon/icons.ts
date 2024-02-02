@@ -4,6 +4,7 @@ import BellOn from '@assets/icons/bell-on.svg';
 import Bell from '@assets/icons/bell.svg';
 import BookmarkFill from '@assets/icons/bookmark-fill.svg';
 import Bookmark from '@assets/icons/bookmark.svg';
+import CameraClick from '@assets/icons/camera-click.svg';
 import Camera from '@assets/icons/camera.svg';
 import ChatOn from '@assets/icons/chat-on.svg';
 import Chat from '@assets/icons/chat.svg';
@@ -40,6 +41,7 @@ export const icons = {
   bookmarkFill: BookmarkFill,
   bookmark: Bookmark,
   camera: Camera,
+  cameraClick: CameraClick,
   chatOn: ChatOn,
   chat: Chat,
   check: Check,

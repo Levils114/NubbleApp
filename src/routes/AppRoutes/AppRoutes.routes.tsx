@@ -9,6 +9,7 @@ import {
   UsersProfileScreen,
   SearchScreen,
   PublishPostScreen,
+  CameraScreen,
 } from '@screens';
 
 import {AppBottomTabNavigator, AppTabNavigator} from './AppTabNavigator.routes';
@@ -26,6 +27,7 @@ export type StackAppRoutes = {
   PublishPostScreen: {
     imageUri: string;
   };
+  CameraScreen: undefined;
 };
 
 interface IAppRoutes {
@@ -48,6 +50,7 @@ export function AppRoutes({initialRouteName}: IAppRoutes) {
       <Stack.Screen name="UsersProfileScreen" component={UsersProfileScreen} />
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen name="PublishPostScreen" component={PublishPostScreen} />
+      <Stack.Screen name="CameraScreen" component={CameraScreen} />
     </Stack.Navigator>
   );
 }

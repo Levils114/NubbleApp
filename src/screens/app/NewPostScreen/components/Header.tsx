@@ -3,16 +3,28 @@ import React from 'react';
 import {ImageBackground} from 'react-native';
 
 import {images} from '@assets/index';
+import {useNavigation} from '@react-navigation/native';
 
 import {Box, Button, Icon, Text} from '@components';
 
 interface Props {
   imageUri?: string;
   imageSize: number;
-  onPress(): void;
 }
 
-export function Header({imageSize, imageUri, onPress}: Props) {
+export function Header({imageSize, imageUri}: Props) {
+  const {navigate} = useNavigation();
+
+  function onChooseImage() {
+    if (imageUri) {
+      navigate('PublishPostScreen', {imageUri});
+    }
+  }
+
+  function navigateToCameraScreen() {
+    navigate('CameraScreen');
+  }
+
   return (
     <Box>
       <ImageBackground
@@ -28,7 +40,7 @@ export function Header({imageSize, imageUri, onPress}: Props) {
             text="Escolher essa"
             mb="s24"
             preset="ghost"
-            onPress={onPress}
+            onPress={onChooseImage}
           />
         )}
       </ImageBackground>
@@ -39,7 +51,7 @@ export function Header({imageSize, imageUri, onPress}: Props) {
         paddingHorizontal="s24"
         paddingVertical="s16">
         <Text preset="headingSmall">Sua galeria</Text>
-        <Icon name="camera" />
+        <Icon name="camera" onPress={navigateToCameraScreen} />
       </Box>
     </Box>
   );

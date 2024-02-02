@@ -13,9 +13,7 @@ const SCREEN_WIDTH = Dimensions.get('screen').width;
 const COLUMNS_NUMBER = 4;
 const ITEM_SIZE = SCREEN_WIDTH / COLUMNS_NUMBER;
 
-export function NewPostScreen({
-  navigation,
-}: AppTabNavigatorScreenParams<'NewPostScreen'>) {
+export function NewPostScreen({}: AppTabNavigatorScreenParams<'NewPostScreen'>) {
   const [imageSelected, setImageSelected] = React.useState<string>();
 
   const permission = usePermission('photosLibrary');
@@ -29,12 +27,6 @@ export function NewPostScreen({
   function onSelectImage(image: string) {
     setImageSelected(image);
     flatListRef.current?.scrollToOffset({offset: 0, animated: true});
-  }
-
-  function onChooseImage() {
-    if (imageSelected) {
-      navigation.navigate('PublishPostScreen', {imageUri: imageSelected});
-    }
   }
 
   function renderItem({item}: ListRenderItemInfo<string>) {
@@ -64,11 +56,7 @@ export function NewPostScreen({
           data={photosList}
           renderItem={renderItem}
           ListHeaderComponent={
-            <Header
-              imageUri={imageSelected}
-              imageSize={SCREEN_WIDTH}
-              onPress={onChooseImage}
-            />
+            <Header imageUri={imageSelected} imageSize={SCREEN_WIDTH} />
           }
           onEndReachedThreshold={0.1}
           onEndReached={fetchNextPage}

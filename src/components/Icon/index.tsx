@@ -32,8 +32,8 @@ export function Icon({
 }: IconProps) {
   const {colors, spacing} = useAppTheme();
   const svgColor = colors[color];
-  const svgStrokeColor = strokeColor && colors[strokeColor];
-  const svgFillColor = fillColor && colors[fillColor];
+  const svgStrokeColor = strokeColor ? colors[strokeColor] : 'none';
+  const svgFillColor = fillColor ? colors[fillColor] : 'none';
   const svgWidth = spacing[width];
   const svgHeight = spacing[height];
 
